@@ -25,16 +25,7 @@ export default function RootLayout({
 }>) {
   const isDemoApp = process.env.NEXT_PUBLIC_DEMO_APP === "true";
   return (
-    <html lang="en">
-      <head>
-        {process.env.NODE_ENV !== "production" && (
-          <script
-            crossOrigin="anonymous"
-            src="//unpkg.com/react-scan/dist/auto.global.js"
-          />
-        )}
-      </head>
-      <body className={inter.className}>
+    <>
         {isDemoApp && (
           <div className="fixed top-0 right-0 left-0 z-10 bg-[#CFC8FE] py-2 text-center text-black shadow-md">
             You're currently using the demo application. To use your own agents,
@@ -54,7 +45,6 @@ export default function RootLayout({
             <SidebarLayout>{children}</SidebarLayout>
           </AuthProvider>
         </NuqsAdapter>
-      </body>
-    </html>
+    </>
   );
 }

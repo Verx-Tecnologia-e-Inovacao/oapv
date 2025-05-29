@@ -24,8 +24,7 @@ export default function Layout({
 }>) {
   const isDemoApp = process.env.NEXT_PUBLIC_DEMO_APP === "true";
   return (
-    <html lang="en">
-      <body className={inter.className}>
+    <>
         {isDemoApp && (
           <div className="fixed top-0 right-0 left-0 z-10 bg-[#CFC8FE] py-2 text-center text-black shadow-md">
             You're currently using the demo application. To use your own agents,
@@ -43,7 +42,6 @@ export default function Layout({
         <AuthProvider>
           <AuthLayout>{children}</AuthLayout>
         </AuthProvider>
-      </body>
-    </html>
+    </>
   );
 }
