@@ -29,14 +29,14 @@ export function AuthDebug() {
   return (
     <Card className="mt-6 max-w-lg">
       <CardHeader>
-        <CardTitle className="text-lg">Auth Debug Panel</CardTitle>
+        <CardTitle className="text-lg">Panel de Debug de Autenticação</CardTitle>
         <CardDescription>
-          This panel shows the current authentication state
+          Este painel mostra o estado atual da autenticação
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-4">
         <div className="grid grid-cols-2 gap-2">
-          <span className="font-medium">Auth Status:</span>
+          <span className="font-medium">Status de Autenticação:</span>
           <span>
             {isLoading
               ? "Loading..."
@@ -45,13 +45,13 @@ export function AuthDebug() {
                 : "Not Authenticated ❌"}
           </span>
 
-          <span className="font-medium">User ID:</span>
+          <span className="font-medium">ID do Usuário:</span>
           <span>{user?.id || "None"}</span>
 
           <span className="font-medium">Email:</span>
           <span>{user?.email || "None"}</span>
 
-          <span className="font-medium">Display Name:</span>
+          <span className="font-medium">Nome Exibido:</span>
           <span>{user?.displayName || "None"}</span>
         </div>
 
@@ -61,7 +61,7 @@ export function AuthDebug() {
             size="sm"
             onClick={() => setShowDetails(!showDetails)}
           >
-            {showDetails ? "Hide Details" : "Show Details"}
+            {showDetails ? "Ocultar Detalhes" : "Mostrar Detalhes"}
           </Button>
 
           {isAuthenticated && (
@@ -72,7 +72,7 @@ export function AuthDebug() {
                 await signOut();
               }}
             >
-              Sign Out
+              Sair
             </Button>
           )}
         </div>
@@ -81,8 +81,8 @@ export function AuthDebug() {
           <Alert>
             <AlertDescription>
               <div className="max-h-48 overflow-auto text-xs">
-                <pre>Session: {JSON.stringify(session, null, 2)}</pre>
-                <pre>User: {JSON.stringify(user, null, 2)}</pre>
+                <pre>Sessão: {JSON.stringify(session, null, 2)}</pre>
+                <pre>Usuário: {JSON.stringify(user, null, 2)}</pre>
               </div>
             </AlertDescription>
           </Alert>
@@ -90,7 +90,7 @@ export function AuthDebug() {
 
         <Alert variant="destructive">
           <AlertDescription>
-            This panel is only visible in development mode.
+            Este painel é apenas visível no modo de desenvolvimento.
           </AlertDescription>
         </Alert>
       </CardContent>

@@ -22,12 +22,12 @@ const data = {
       icon: MessageCircle,
     },
     {
-      title: "Agents",
+      title: "Agentes",
       url: "/agents",
       icon: Bot,
     },
     {
-      title: "Tools",
+      title: "Ferramentas",
       url: "/tools",
       icon: Wrench,
     },

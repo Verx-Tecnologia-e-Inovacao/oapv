@@ -11,7 +11,7 @@ export default function EmptyCollectionsState() {
   const { createCollection, setSelectedCollection } = useRagContext();
 
   const handleSubmit = async (name: string, description: string) => {
-    const loadingToast = toast.loading("Creating collection", {
+    const loadingToast = toast.loading("Criando coleção", {
       richColors: true,
     });
     const newCollection = await createCollection(name, {
@@ -20,11 +20,11 @@ export default function EmptyCollectionsState() {
     toast.dismiss(loadingToast);
     if (newCollection) {
       setOpen(false);
-      toast.success("Collection created successfully", { richColors: true });
+      toast.success("Coleção criada com sucesso", { richColors: true });
       setSelectedCollection(newCollection);
     } else {
       toast.warning(
-        `Collection named '${name}' could not be created (likely already exists).`,
+        `Coleção com nome '${name}' não pôde ser criada (provavelmente já existe).`,
         {
           duration: 5000,
           richColors: true,
@@ -42,11 +42,11 @@ export default function EmptyCollectionsState() {
 
         <div className="max-w-md space-y-2">
           <h3 className="text-xl font-semibold tracking-tight">
-            No collections yet
+            Nenhuma coleção ainda
           </h3>
           <p className="text-muted-foreground">
-            Collections help you organize your documents and resources in one
-            place. Create your first collection to get started.
+            Coleções ajudam você a organizar seus documentos e recursos em um
+            único lugar. Crie sua primeira coleção para começar.
           </p>
         </div>
 
@@ -60,7 +60,7 @@ export default function EmptyCollectionsState() {
               className="mt-4 gap-2"
             >
               <FolderPlus className="h-4 w-4" />
-              Create your first collection
+              Criar sua primeira coleção
             </Button>
           }
         />

@@ -74,7 +74,7 @@ export function GraphSelect({
       }}
     >
       <SelectTrigger className={cn(className)}>
-        <SelectValue placeholder="Select a graph" />
+        <SelectValue placeholder="Selecione um grafo" />
       </SelectTrigger>
       <SelectContent>
         <SelectGroup>

@@ -14,8 +14,8 @@ const inter = Inter({
 });
 
 export const metadata: Metadata = {
-  title: "Open Agent Platform",
-  description: "Open Agent Platform by LangChain",
+  title: "Plataforma de Agentes | VIA",
+  description: "Plataforma de agentes inteligentes da VIA",
 };
 
 export default function RootLayout({

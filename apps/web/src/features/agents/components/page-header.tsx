@@ -21,9 +21,9 @@ export function PageHeader({ title, description, action }: PageHeaderProps) {
         )}
       </div>
       {action || (
-        <Button onClick={() => setShowCreateAgentDialog(true)}>
+        <Button variant="brand" onClick={() => setShowCreateAgentDialog(true)}>
           <PlusCircle className="mr-2 h-4 w-4" />
-          Create Agent
+          Criar Agente
         </Button>
       )}
 

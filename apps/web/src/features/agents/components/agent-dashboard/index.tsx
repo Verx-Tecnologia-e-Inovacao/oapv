@@ -87,7 +87,7 @@ export function AgentDashboard() {
           <div className="relative w-full max-w-sm">
             <Search className="text-muted-foreground absolute top-2.5 left-2.5 h-4 w-4" />
             <Input
-              placeholder="Search agents..."
+              placeholder="Buscar agentes..."
               className="pl-8"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
@@ -98,7 +98,7 @@ export function AgentDashboard() {
         <div className="flex flex-wrap items-center gap-4">
           <div className="flex items-center gap-2">
             <Filter className="text-muted-foreground h-4 w-4" />
-            <span className="text-sm font-medium">Filters:</span>
+            <span className="text-sm font-medium">Filtros:</span>
           </div>
 
           <Select
@@ -106,10 +106,10 @@ export function AgentDashboard() {
             onValueChange={setGraphFilter}
           >
             <SelectTrigger className="h-9 min-w-[180px]">
-              <SelectValue placeholder="All Templates" />
+              <SelectValue placeholder="Todos os Modelos" />
             </SelectTrigger>
             <SelectContent>
-              <SelectItem value="all">All Templates</SelectItem>
+              <SelectItem value="all">Todos os Modelos</SelectItem>
               {allGraphGroups.map((graph) => (
                 <SelectItem
                   key={`${graph.deployment.id}:${graph.graphId}`}
@@ -129,7 +129,7 @@ export function AgentDashboard() {
       <div className="flex items-center justify-between">
         <h2 className="text-lg font-medium">
           {filteredAgents.length}{" "}
-          {filteredAgents.length === 1 ? "Agent" : "Agents"}
+          {filteredAgents.length === 1 ? "Agente" : "Agentes"}
         </h2>
       </div>
 
@@ -138,13 +138,13 @@ export function AgentDashboard() {
           <div className="bg-muted mx-auto flex h-20 w-20 items-center justify-center rounded-full">
             <Search className="text-muted-foreground h-10 w-10" />
           </div>
-          <h2 className="mt-6 text-xl font-semibold">No agents found</h2>
+          <h2 className="mt-6 text-xl font-semibold">Nenhum agente encontrado</h2>
           <p className="text-muted-foreground mt-2 mb-8 text-center">
-            We couldn't find any agents matching your search criteria. Try
-            adjusting your filters or create a new agent.
+            Não encontramos nenhum agente que corresponda aos seus critérios de busca. Tente
+            ajustar seus filtros ou criar um novo agente.
           </p>
-          <Button onClick={() => setShowCreateDialog(true)}>
-            Create Agent
+          <Button variant="brand" onClick={() => setShowCreateDialog(true)}>
+            Criar Agente
           </Button>
         </div>
       ) : (

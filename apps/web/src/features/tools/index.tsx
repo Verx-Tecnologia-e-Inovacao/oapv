@@ -23,7 +23,7 @@ function TotalToolsBadge({
   return (
     <span className="flex items-center gap-2">
       {loading ? (
-        <Badge variant="outline">Loading...</Badge>
+        <Badge variant="outline">Carregando...</Badge>
       ) : (
         <Badge variant="outline">
           {toolsCount}
@@ -51,7 +51,7 @@ export default function ToolsInterface(): React.ReactNode {
       const newTools = await getTools(cursor);
       setTools((prevTools) => [...prevTools, ...newTools]);
     } catch (error) {
-      console.error("Error loading more tools:", error);
+      console.error("Erro ao carregar mais ferramentas:", error);
     } finally {
       setLoadingMore(false);
     }
@@ -63,7 +63,7 @@ export default function ToolsInterface(): React.ReactNode {
         <div className="flex items-center justify-start gap-2">
           <Wrench className="size-6" />
           <p className="flex items-center gap-2 text-lg font-semibold tracking-tight">
-            Tools
+            Ferramentas
             <TotalToolsBadge
               toolsCount={tools.length}
               loading={loading}
@@ -73,7 +73,7 @@ export default function ToolsInterface(): React.ReactNode {
         </div>
         <Search
           onSearchChange={debouncedSetSearchTerm}
-          placeholder="Search tools..."
+          placeholder="Buscar ferramentas..."
           className="w-full"
         />
       </div>
@@ -93,12 +93,12 @@ export default function ToolsInterface(): React.ReactNode {
         ))}
         {filteredTools.length === 0 && toolSearchTerm && (
           <p className="my-4 w-full text-center text-sm text-slate-500">
-            No tools found matching "{toolSearchTerm}".
+            Nenhuma ferramenta encontrada com "{toolSearchTerm}".
           </p>
         )}
         {tools.length === 0 && !toolSearchTerm && !loading && (
           <p className="my-4 w-full text-center text-sm text-slate-500">
-            No tools available for this agent.
+            Nenhuma ferramenta disponível para este agente.
           </p>
         )}
       </div>
@@ -111,7 +111,7 @@ export default function ToolsInterface(): React.ReactNode {
             variant="outline"
             className="gap-1 px-2.5"
           >
-            {loadingMore ? "Loading..." : "Load More Tools"}
+            {loadingMore ? "Carregando..." : "Carregar Mais Ferramentas"}
             <ChevronRightIcon className="h-4 w-4" />
           </Button>
         </div>

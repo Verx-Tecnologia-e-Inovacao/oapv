@@ -15,7 +15,6 @@ import {
   type RemoveUIMessage,
 } from "@langchain/langgraph-sdk/react-ui";
 import { useQueryState } from "nuqs";
-import { LangGraphLogoSVG } from "@/components/icons/langgraph";
 import { AgentsCombobox } from "@/components/ui/agents-combobox";
 import { useAgentsContext } from "@/providers/Agents";
 import { Button } from "@/components/ui/button";
@@ -23,6 +22,7 @@ import { toast } from "sonner";
 import { isUserSpecifiedDefaultAgent } from "@/lib/agent-utils";
 import { useAuthContext } from "@/providers/Auth";
 import { getDeployments } from "@/lib/environment/deployments";
+import { ViaLogoSVG } from "@/components/icons/via";
 
 export type StateType = { messages: Message[]; ui?: UIMessage[] };
 
@@ -54,12 +54,12 @@ const StreamSession = ({
   useProxyRoute?: boolean;
 }) => {
   if (!useProxyRoute && !accessToken) {
-    toast.error("Access token must be provided if not using proxy route");
+    toast.error("Token de acesso deve ser fornecido se não estiver usando rota de proxy");
   }
 
   const deployment = getDeployments().find((d) => d.id === deploymentId);
   if (!deployment) {
-    throw new Error(`Deployment ${deploymentId} not found`);
+    throw new Error(`Deployment ${deploymentId} não encontrado`);
   }
 
   let deploymentUrl = deployment.deploymentUrl;
@@ -133,7 +133,7 @@ export const StreamProvider: React.FC<{ children: ReactNode }> = ({
 
   const handleStartChat = () => {
     if (!value) {
-      toast.info("Please select an agent");
+      toast.info("Por favor, selecione um agente antes de iniciar");
       return;
     }
     const [agentId_, deploymentId_] = value.split(":");
@@ -148,14 +148,14 @@ export const StreamProvider: React.FC<{ children: ReactNode }> = ({
         <div className="animate-in fade-in-0 zoom-in-95 bg-background flex min-h-64 max-w-3xl flex-col rounded-lg border shadow-lg">
           <div className="mt-14 flex flex-col gap-2 p-6">
             <div className="flex flex-col items-start gap-2">
-              <LangGraphLogoSVG className="h-7" />
+              <ViaLogoSVG width={36} height={36} />
+
               <h1 className="text-xl font-semibold tracking-tight">
-                Open Agent Platform
+                VIA - Plataforma de Agentes
               </h1>
             </div>
             <p className="text-muted-foreground">
-              Welcome to Open Agent Platform's chat! To continue, please select
-              an agent to chat with.
+              Bem-vindo ao chat da Plataforma de Agentes da VIA! Para continuar, selecione o agente com quem deseja conversar.
             </p>
           </div>
           <div className="mb-24 grid grid-cols-[1fr_auto] gap-4 px-6 pt-4">
@@ -172,7 +172,7 @@ export const StreamProvider: React.FC<{ children: ReactNode }> = ({
               open={open}
               setOpen={setOpen}
             />
-            <Button onClick={handleStartChat}>Start Chat</Button>
+            <Button variant="brand" onClick={handleStartChat}>Iniciar Chat</Button>
           </div>
         </div>
       </div>
@@ -181,7 +181,7 @@ export const StreamProvider: React.FC<{ children: ReactNode }> = ({
 
   const useProxyRoute = process.env.NEXT_PUBLIC_USE_LANGSMITH_AUTH === "true";
   if (!useProxyRoute && !session?.accessToken) {
-    toast.error("Access token must be provided if not using proxy route");
+    toast.error("Token de acesso deve ser fornecido se não estiver usando rota de proxy");
     return null;
   }
 
@@ -201,7 +201,7 @@ export const StreamProvider: React.FC<{ children: ReactNode }> = ({
 export const useStreamContext = (): StreamContextType => {
   const context = useContext(StreamContext);
   if (context === undefined) {
-    throw new Error("useStreamContext must be used within a StreamProvider");
+    throw new Error("useStreamContext deve ser usado dentro de um StreamProvider");
   }
   return context;
 };

@@ -34,24 +34,24 @@ export function DeleteCollectionAlert({
           className="w-full justify-start px-2 py-1.5 text-sm"
         >
           <Trash2 className="text-destructive mr-2 h-4 w-4" />
-          <span>Delete</span>
+          <span>Excluir</span>
         </Button>
       </AlertDialogTrigger>
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Delete Collection</AlertDialogTitle>
+          <AlertDialogTitle>Excluir Coleção</AlertDialogTitle>
           <AlertDialogDescription>
-            Are you sure you want to delete the collection "{collection.name}
-            "? This will also delete all associated documents.
+            Tem certeza que deseja excluir a coleção "{collection.name}
+            "? Isso também excluirá todos os documentos associados.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel>Cancelar</AlertDialogCancel>
           <AlertDialogAction
             onClick={() => onDelete(collection.uuid)}
             className="bg-destructive hover:bg-destructive/90 text-white"
           >
-            Delete
+            Excluir
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>

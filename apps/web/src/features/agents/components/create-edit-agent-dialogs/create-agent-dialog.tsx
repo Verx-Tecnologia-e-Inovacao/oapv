@@ -64,7 +64,7 @@ function CreateAgentFormContent(props: {
   }) => {
     const { name, description, config } = data;
     if (!name || !description) {
-      toast.warning("Name and description are required", {
+      toast.warning("Nome e descrição são obrigatórios", {
         richColors: true,
       });
       return;
@@ -83,14 +83,14 @@ function CreateAgentFormContent(props: {
     setSubmitting(false);
 
     if (!newAgent) {
-      toast.error("Failed to create agent", {
-        description: "Please try again",
+      toast.error("Falha ao criar agente", {
+        description: "Por favor, tente novamente",
         richColors: true,
       });
       return;
     }
 
-    toast.success("Agent created successfully!", {
+    toast.success("Agente criado com sucesso!", {
       richColors: true,
     });
 
@@ -123,15 +123,16 @@ function CreateAgentFormContent(props: {
           variant="outline"
           disabled={loading || submitting}
         >
-          Cancel
+          Cancelar
         </Button>
         <Button
           type="submit"
+          variant="brand"
           className="flex w-full items-center justify-center gap-1"
           disabled={loading || submitting}
         >
           {submitting ? <LoaderCircle className="animate-spin" /> : <Bot />}
-          <span>{submitting ? "Creating..." : "Create Agent"}</span>
+          <span>{submitting ? "Criando..." : "Criar Agente"}</span>
         </Button>
       </AlertDialogFooter>
     </form>
@@ -162,7 +163,7 @@ export function CreateAgentDialog({
         (a) => a.assistant_id === agentId && a.deploymentId === deploymentId,
       );
       if (!deployment || !defaultAgent) {
-        toast.error("Something went wrong. Please try again.", {
+        toast.error("Algo deu errado. Por favor, tente novamente.", {
           richColors: true,
         });
         return;
@@ -200,11 +201,11 @@ export function CreateAgentDialog({
         <AlertDialogHeader>
           <div className="flex items-start justify-between gap-4">
             <div className="flex flex-col gap-1.5">
-              <AlertDialogTitle>Create Agent</AlertDialogTitle>
+              <AlertDialogTitle>Criar Agente</AlertDialogTitle>
               <AlertDialogDescription>
-                Create a new agent for &apos;
+                Criar um novo agente para o grafo &apos;
                 <span className="font-medium">{selectedGraph?.graph_id}</span>
-                &apos; graph.
+                &apos;.
               </AlertDialogDescription>
             </div>
             <AlertDialogCancel size="icon">
@@ -215,7 +216,7 @@ export function CreateAgentDialog({
 
         {!agentId && !graphId && !deploymentId && (
           <div className="flex flex-col items-start justify-start gap-2">
-            <p>Please select a graph to create an agent for.</p>
+            <p>Por favor, selecione um grafo para criar um agente.</p>
             <GraphSelect
               className="w-full"
               agents={agents}

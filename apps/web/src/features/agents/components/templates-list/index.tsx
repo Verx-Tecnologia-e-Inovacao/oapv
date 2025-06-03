@@ -75,7 +75,7 @@ export function TemplatesList() {
         <div className="relative flex-1">
           <Search className="text-muted-foreground absolute top-1/2 left-2.5 h-4 w-4 -translate-y-1/2" />
           <Input
-            placeholder="Search by graph or agent name..."
+            placeholder="Buscar por grafo ou nome do agente..."
             className="pl-8"
             value={searchQueryState}
             onChange={(e) => setSearchQueryState(e.target.value)}
@@ -88,11 +88,11 @@ export function TemplatesList() {
           <div className="bg-muted mx-auto flex h-20 w-20 items-center justify-center rounded-full">
             <Search className="text-muted-foreground h-10 w-10" />
           </div>
-          <h2 className="mt-6 text-xl font-semibold">No graphs found</h2>
+          <h2 className="mt-6 text-xl font-semibold">Nenhum grafo encontrado</h2>
           <p className="text-muted-foreground mt-2 mb-8 text-center">
             {searchQueryState
-              ? "We couldn't find any graphs matching your search."
-              : "There are no agent graphs configured yet."}
+              ? "Não encontramos nenhum grafo que corresponda à sua busca."
+              : "Não há grafos de agentes configurados ainda."}
           </p>
         </div>
       ) : (

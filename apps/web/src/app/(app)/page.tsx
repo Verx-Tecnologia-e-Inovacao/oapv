@@ -20,6 +20,7 @@ export default function ChatPage(): React.ReactNode {
           <ChatBreadcrumb />
         </div>
       </header>
+
       <ChatInterface />
     </React.Suspense>
   );

@@ -59,7 +59,7 @@ export default function SigninInterface() {
     setError(null);
 
     if (!email || !password) {
-      setError("Please enter both email and password");
+      setError("Por favor, insira seu email e senha");
       return;
     }
 
@@ -84,8 +84,8 @@ export default function SigninInterface() {
         setShowManualRedirect(true);
       }, 5000);
     } catch (err) {
-      console.error("Sign in error:", err);
-      setError("An unexpected error occurred. Please try again.");
+      console.error("Erro ao fazer login:", err);
+      setError("Erro inesperado. Tente novamente.");
     } finally {
       setIsLoading(false);
     }
@@ -110,9 +110,9 @@ export default function SigninInterface() {
     <div className="flex min-h-screen items-center justify-center py-10">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-center text-2xl">Sign In</CardTitle>
+          <CardTitle className="text-center text-2xl">Entrar</CardTitle>
           <CardDescription className="text-center">
-            Welcome back to Open Agent Platform
+            Bem-vindo de volta à Plataforma de Agentes da VIA
           </CardDescription>
         </CardHeader>
         <CardContent>
@@ -125,14 +125,14 @@ export default function SigninInterface() {
           {isSuccess && (
             <Alert className="mb-4 border-green-200 bg-green-50 text-green-800">
               <AlertDescription className="flex flex-col gap-2">
-                <span>Success! We're redirecting you to the dashboard...</span>
+                <span>Sucesso! Redirecionando para o dashboard...</span>
                 {showManualRedirect && (
                   <Button
                     onClick={() => router.push("/")}
                     variant="outline"
                     className="mt-2 border-green-300 text-green-700 hover:bg-green-100"
                   >
-                    Go to Dashboard Now
+                    Ir para o Dashboard Agora
                   </Button>
                 )}
               </AlertDescription>
@@ -148,7 +148,7 @@ export default function SigninInterface() {
               <Input
                 id="email"
                 type="email"
-                placeholder="name@example.com"
+                placeholder="nome@exemplo.com.br"
                 value={email}
                 onChange={(e) => setEmail(e.target.value)}
                 required
@@ -157,17 +157,17 @@ export default function SigninInterface() {
 
             <div className="space-y-2">
               <div className="flex items-center justify-between">
-                <Label htmlFor="password">Password</Label>
+                <Label htmlFor="password">Senha</Label>
                 <Link
                   href="/forgot-password"
                   className="text-primary text-sm font-medium hover:underline"
                 >
-                  Forgot password?
+                  Esqueceu sua senha?
                 </Link>
               </div>
               <PasswordInput
                 id="password"
-                placeholder="Enter your password"
+                placeholder="Digite sua senha"
                 value={password}
                 onChange={(e) => setPassword(e.target.value)}
                 required
@@ -183,13 +183,14 @@ export default function SigninInterface() {
             <Button
               type="submit"
               className="w-full"
+              variant="brand"
               disabled={isLoading || isSuccess}
             >
               {isLoading
-                ? "Signing in..."
+                ? "Entrando..."
                 : isSuccess
-                  ? "Signed In Successfully"
-                  : "Sign In"}
+                  ? "Sucesso!"
+                  : "Entrar"}
             </Button>
           </form>
 
@@ -201,7 +202,7 @@ export default function SigninInterface() {
                 </div>
                 <div className="relative flex justify-center text-xs uppercase">
                   <span className="bg-card text-muted-foreground px-2">
-                    Or continue with
+                    Ou continue com
                   </span>
                 </div>
               </div>
@@ -225,19 +226,19 @@ export default function SigninInterface() {
                 >
                   <path d="M20.283 10.356h-8.327v3.451h4.792c-.446 2.193-2.313 3.453-4.792 3.453a5.27 5.27 0 0 1-5.279-5.28 5.27 5.27 0 0 1 5.279-5.279c1.259 0 2.397.447 3.29 1.178l2.6-2.599c-1.584-1.381-3.615-2.233-5.89-2.233a8.908 8.908 0 0 0-8.934 8.934 8.907 8.907 0 0 0 8.934 8.934c4.467 0 8.529-3.249 8.529-8.934 0-.528-.081-1.097-.202-1.625z"></path>
                 </svg>
-                Sign in with Google
+                Entrar com Google
               </Button>
             </>
           )}
         </CardContent>
         <CardFooter className="flex justify-center">
           <p className="text-muted-foreground text-sm">
-            Don&apos;t have an account?{" "}
+            Não tem uma conta?{" "}
             <Link
               href="/signup"
               className="text-primary font-medium hover:underline"
             >
-              Sign up
+              Cadastre-se
             </Link>
           </p>
         </CardFooter>
