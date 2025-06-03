@@ -238,7 +238,10 @@ export function DocumentsCard({
           <CardDescription>Gerencie documentos nesta coleção</CardDescription>
         </div>
         {defaultAgent && (
-          <Button onClick={() => handleChatWithDocuments(defaultAgent)}>
+          <Button
+            variant="brand"
+            onClick={() => handleChatWithDocuments(defaultAgent)}
+          >
             <MessageSquare className="mr-2 h-3.5 w-3.5" />
             Conversar com seus documentos
           </Button>

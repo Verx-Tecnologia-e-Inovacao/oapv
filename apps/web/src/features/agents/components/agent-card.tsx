@@ -145,7 +145,10 @@ export function AgentCard({ agent, showDeployment }: AgentCardProps) {
             href={`/?agentId=${agent.assistant_id}&deploymentId=${agent.deploymentId}`}
             className="ml-auto"
           >
-            <Button size="sm">
+            <Button
+              variant="brand"
+              size="sm"
+            >
               <MessageSquare className="mr-2 h-3.5 w-3.5" />
               Conversar
             </Button>

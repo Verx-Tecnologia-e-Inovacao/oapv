@@ -33,7 +33,7 @@ function ContentCopyable({
     <TooltipIconButton
       onClick={(e) => handleCopy(e)}
       variant="ghost"
-      tooltip="Copy content"
+      tooltip="Copiar conteúdo"
       disabled={disabled}
     >
       <AnimatePresence
@@ -136,13 +136,13 @@ export function CommandBar({
 }) {
   if (isHumanMessage && isAiMessage) {
     throw new Error(
-      "Can only set one of isHumanMessage or isAiMessage to true, not both.",
+      "Apenas um dos valores isHumanMessage ou isAiMessage pode ser true, não ambos.",
     );
   }
 
   if (!isHumanMessage && !isAiMessage) {
     throw new Error(
-      "One of isHumanMessage or isAiMessage must be set to true.",
+      "Um dos valores isHumanMessage ou isAiMessage deve ser true.",
     );
   }
 
@@ -153,7 +153,7 @@ export function CommandBar({
       handleSubmitEdit === undefined)
   ) {
     throw new Error(
-      "If isHumanMessage is true, all of isEditing, setIsEditing, and handleSubmitEdit must be set.",
+      "Se isHumanMessage é true, todos os valores isEditing, setIsEditing e handleSubmitEdit devem ser definidos.",
     );
   }
 
@@ -168,7 +168,7 @@ export function CommandBar({
       <div className="flex items-center gap-2">
         <TooltipIconButton
           disabled={isLoading}
-          tooltip="Cancel edit"
+          tooltip="Cancelar edição"
           variant="ghost"
           onClick={() => {
             setIsEditing(false);
@@ -178,7 +178,7 @@ export function CommandBar({
         </TooltipIconButton>
         <TooltipIconButton
           disabled={isLoading}
-          tooltip="Submit"
+          tooltip="Enviar"
           variant="secondary"
           onClick={handleSubmitEdit}
         >
@@ -197,7 +197,7 @@ export function CommandBar({
       {isAiMessage && !!handleRegenerate && (
         <TooltipIconButton
           disabled={isLoading}
-          tooltip="Refresh"
+          tooltip="Atualizar"
           variant="ghost"
           onClick={handleRegenerate}
         >
@@ -207,7 +207,7 @@ export function CommandBar({
       {showEdit && (
         <TooltipIconButton
           disabled={isLoading}
-          tooltip="Edit"
+          tooltip="Editar"
           variant="ghost"
           onClick={() => {
             setIsEditing?.(true);

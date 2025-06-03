@@ -30,7 +30,7 @@ export default function ForgotPasswordInterface() {
     setSuccess(false);
 
     if (!email) {
-      setError("Please enter your email address");
+      setError("Por favor, insira seu endereço de email");
       return;
     }
 
@@ -47,8 +47,8 @@ export default function ForgotPasswordInterface() {
       setSuccess(true);
       setEmail("");
     } catch (err) {
-      console.error("Password reset error:", err);
-      setError("An unexpected error occurred. Please try again.");
+      console.error("Erro ao redefinir senha:", err);
+      setError("Ocorreu um erro inesperado. Tente novamente.");
     } finally {
       setIsLoading(false);
     }
@@ -58,19 +58,21 @@ export default function ForgotPasswordInterface() {
     <div className="flex min-h-screen items-center justify-center py-10">
       <Card className="w-full max-w-md">
         <CardHeader>
-          <CardTitle className="text-center text-2xl">Reset Password</CardTitle>
+          <CardTitle className="text-center text-2xl">
+            Esqueceu sua senha?
+          </CardTitle>
           <CardDescription className="text-center">
-            Enter your email address and we'll send you a link to reset your
-            password
+            Insira seu endereço de email e enviaremos um link para redefinir sua
+            senha
           </CardDescription>
         </CardHeader>
         <CardContent>
           {success ? (
             <Alert className="mb-4">
               <AlertDescription>
-                If your email address is associated with an account, you will
-                receive an email with instructions to reset your password
-                shortly.
+                Se o seu endereço de email estiver associado a uma conta, você
+                receberá um email com instruções para redefinir sua senha
+                em breve.
               </AlertDescription>
             </Alert>
           ) : (
@@ -101,19 +103,19 @@ export default function ForgotPasswordInterface() {
                 className="w-full"
                 disabled={isLoading}
               >
-                {isLoading ? "Sending..." : "Send Reset Link"}
+                {isLoading ? "Enviando..." : "Enviar Link de Reseto"}
               </Button>
             </form>
           )}
         </CardContent>
         <CardFooter className="flex justify-center">
           <p className="text-muted-foreground text-sm">
-            Remember your password?{" "}
+            Lembra da sua senha?{" "}
             <Link
               href="/signin"
               className="text-primary font-medium hover:underline"
             >
-              Sign in
+              Entrar
             </Link>
           </p>
         </CardFooter>

@@ -150,7 +150,7 @@ function ResponseComponent({
           disabled={streaming}
           onClick={handleSubmit}
         >
-          Send Response
+          Enviar resposta
         </Button>
       </div>
     </div>
