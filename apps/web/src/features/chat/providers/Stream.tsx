@@ -15,7 +15,6 @@ import {
   type RemoveUIMessage,
 } from "@langchain/langgraph-sdk/react-ui";
 import { useQueryState } from "nuqs";
-import { LangGraphLogoSVG } from "@/components/icons/langgraph";
 import { AgentsCombobox } from "@/components/ui/agents-combobox";
 import { useAgentsContext } from "@/providers/Agents";
 import { Button } from "@/components/ui/button";
@@ -23,6 +22,7 @@ import { toast } from "sonner";
 import { isUserSpecifiedDefaultAgent } from "@/lib/agent-utils";
 import { useAuthContext } from "@/providers/Auth";
 import { getDeployments } from "@/lib/environment/deployments";
+import { ViaLogoSVG } from "@/components/icons/via";
 
 export type StateType = { messages: Message[]; ui?: UIMessage[] };
 
@@ -148,14 +148,14 @@ export const StreamProvider: React.FC<{ children: ReactNode }> = ({
         <div className="animate-in fade-in-0 zoom-in-95 bg-background flex min-h-64 max-w-3xl flex-col rounded-lg border shadow-lg">
           <div className="mt-14 flex flex-col gap-2 p-6">
             <div className="flex flex-col items-start gap-2">
-              <LangGraphLogoSVG className="h-7" />
+              <ViaLogoSVG width={36} height={36} />
+
               <h1 className="text-xl font-semibold tracking-tight">
-                Open Agent Platform
+                VIA - Plataforma de Agentes
               </h1>
             </div>
             <p className="text-muted-foreground">
-              Welcome to Open Agent Platform's chat! To continue, please select
-              an agent to chat with.
+              Bem-vindo ao chat da Plataforma de Agentes da VIA! Para continuar, selecione o agente com quem deseja conversar.
             </p>
           </div>
           <div className="mb-24 grid grid-cols-[1fr_auto] gap-4 px-6 pt-4">
@@ -172,7 +172,7 @@ export const StreamProvider: React.FC<{ children: ReactNode }> = ({
               open={open}
               setOpen={setOpen}
             />
-            <Button onClick={handleStartChat}>Start Chat</Button>
+            <Button variant="brand" onClick={handleStartChat}>Iniciar Chat</Button>
           </div>
         </div>
       </div>

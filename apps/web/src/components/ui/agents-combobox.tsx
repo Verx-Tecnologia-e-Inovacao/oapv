@@ -123,7 +123,7 @@ const getNameFromValue = (value: string, agents: Agent[]) => {
 
 export function AgentsCombobox({
   agents,
-  placeholder = "Select an agent...",
+  placeholder = "Selecione um agente...",
   open,
   setOpen,
   value,
@@ -209,16 +209,16 @@ export function AgentsCombobox({
             return 0;
           }}
         >
-          <CommandInput placeholder="Search agents..." />
+          <CommandInput placeholder="Procurar agente..." />
           <CommandList>
             <CommandEmpty>
               {agentsLoading ? (
                 <span className="flex items-center justify-center gap-2">
                   <Loader2 className="size-4 animate-spin" />
-                  Loading agents...
+                  Carregando agentes...
                 </span>
               ) : (
-                "No agents found."
+                "Nenhum agente encontrado."
               )}
             </CommandEmpty>
             {deployments.map((deployment) => {

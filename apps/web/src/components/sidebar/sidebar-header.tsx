@@ -6,8 +6,8 @@ import {
   SidebarMenuItem,
   SidebarMenuButton,
 } from "@/components/ui/sidebar";
-import { LangGraphLogoSVG } from "../icons/langgraph";
 import NextLink from "next/link";
+import { ViaLogoSVG } from "../icons/via";
 
 export function SiteHeader() {
   return (
@@ -20,10 +20,11 @@ export function SiteHeader() {
             className="flex items-center justify-center gap-0"
           >
             <NextLink href="/">
-              <LangGraphLogoSVG className="!h-4 !w-auto flex-shrink-0" />
+              <ViaLogoSVG />
+
               <div className="grid flex-1 pl-2 text-left text-sm leading-tight transition-all group-data-[collapsible=icon]:pl-0 group-data-[collapsible=icon]:opacity-0">
-                <span className="truncate font-semibold">
-                  Open Agent Platform
+                <span className="truncate font-semibold text-[#e43348]">
+                  VIA - Agentes Inteligentes
                 </span>
               </div>
             </NextLink>
