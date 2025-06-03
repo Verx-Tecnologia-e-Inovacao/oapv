@@ -78,7 +78,7 @@ function ScrollToBottom(props: { className?: string }) {
       onClick={() => scrollToBottom()}
     >
       <ArrowDown className="h-4 w-4" />
-      <span>Scroll to bottom</span>
+      <span>Rolar para baixo</span>
     </Button>
   );
 }
@@ -179,7 +179,7 @@ function NewThreadButton(props: { hasMessages: boolean }) {
           <div className="text-secondary-foreground bg-secondary flex gap-2 p-3 pr-10 pb-3 text-xs">
             <SquarePen className="size-4 shrink-0" />
             <span className="text-secondary-foreground mb-[1px] text-xs">
-              Selecting a different agent will create a new thread.
+              Selecionar um agente diferente criará uma nova conversa.
             </span>
           </div>
         }
@@ -190,7 +190,7 @@ function NewThreadButton(props: { hasMessages: boolean }) {
           size="lg"
           className="relative size-9 p-4 shadow-none focus-within:z-10"
           tooltip={
-            isMac ? "New thread (Cmd+Shift+O)" : "New thread (Ctrl+Shift+O)"
+            isMac ? "Nova conversa (Cmd+Shift+O)" : "Nova conversa (Ctrl+Shift+O)"
           }
           variant="outline"
           onClick={handleNewThread}
@@ -246,10 +246,10 @@ export function Thread() {
       // Message is defined, and it has not been logged yet. Save it, and send the error
       lastError.current = message;
       setErrorMessage(message);
-      toast.error("An error occurred. Please try again.", {
+      toast.error("Ocorreu um erro. Por favor, tente novamente.", {
         description: (
           <p>
-            <strong>Error:</strong> <code>{message}</code>
+            <strong>Erro:</strong> <code>{message}</code>
           </p>
         ),
         richColors: true,
@@ -403,7 +403,7 @@ export function Thread() {
               {errorMessage && (
                 <Alert variant="destructive">
                   <AlertCircle className="size-4" />
-                  <AlertTitle>An error occurred:</AlertTitle>
+                  <AlertTitle>Ocorreu um erro:</AlertTitle>
                   <AlertDescription>{errorMessage}</AlertDescription>
                 </Alert>
               )}
@@ -455,7 +455,7 @@ export function Thread() {
                         form?.requestSubmit();
                       }
                     }}
-                    placeholder="Type your message..."
+                    placeholder="Digite sua mensagem..."
                     className="field-sizing-content resize-none border-none bg-transparent p-3.5 pb-0 shadow-none ring-0 outline-none focus:ring-0 focus:outline-none"
                   />
 
@@ -472,7 +472,7 @@ export function Thread() {
                           htmlFor="render-tool-calls"
                           className="text-sm text-gray-600"
                         >
-                          Hide Tool Calls
+                          Ocultar Chamadas de Ferramentas
                         </Label>
                       </div>
                     </div>
@@ -482,7 +482,7 @@ export function Thread() {
                     >
                       <Plus className="size-5 text-gray-600" />
                       <span className="text-sm text-gray-600">
-                        Upload PDF or Image
+                        Enviar PDF ou Imagem
                       </span>
                     </Label>
                     <input
@@ -500,7 +500,7 @@ export function Thread() {
                         className="ml-auto"
                       >
                         <LoaderCircle className="h-4 w-4 animate-spin" />
-                        Cancel
+                        Cancelar
                       </Button>
                     ) : (
                       <Button
@@ -510,7 +510,7 @@ export function Thread() {
                           isLoading || (!hasInput && contentBlocks.length === 0)
                         }
                       >
-                        Send
+                        Enviar
                       </Button>
                     )}
                   </div>
