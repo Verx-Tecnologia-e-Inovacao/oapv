@@ -5,7 +5,7 @@ import { Collection, CollectionCreate } from "@/types/collection";
 import { toast } from "sonner";
 import { useAuthContext } from "@/providers/Auth";
 
-export const DEFAULT_COLLECTION_NAME = "default_collection";
+export const DEFAULT_COLLECTION_NAME = "colecao_padrao";
 
 export function getDefaultCollection(collections: Collection[]): Collection {
   return (
@@ -17,7 +17,7 @@ export function getDefaultCollection(collections: Collection[]): Collection {
 function getApiUrlOrThrow(): URL {
   if (!process.env.NEXT_PUBLIC_RAG_API_URL) {
     throw new Error(
-      "Failed to upload documents: API URL not configured. Please set NEXT_PUBLIC_RAG_API_URL",
+      "Falha ao fazer upload dos documentos: URL da API não configurada. Configure NEXT_PUBLIC_RAG_API_URL",
     );
   }
   return new URL(process.env.NEXT_PUBLIC_RAG_API_URL);
@@ -25,7 +25,7 @@ function getApiUrlOrThrow(): URL {
 
 export function getCollectionName(name: string | undefined) {
   if (!name) return "";
-  return name === DEFAULT_COLLECTION_NAME ? "Default" : name;
+  return name === DEFAULT_COLLECTION_NAME ? "Padrão" : name;
 }
 
 /**
@@ -57,7 +57,7 @@ async function uploadDocuments(
   if (metadatas) {
     if (metadatas.length !== files.length) {
       throw new Error(
-        `Number of metadata objects (${metadatas.length}) must match the number of files (${files.length}).`,
+        `Número de metadados (${metadatas.length}) deve ser igual ao número de arquivos (${files.length}).`,
       );
     }
     // FastAPI expects the metadatas as a JSON *string* in the form data
@@ -76,7 +76,7 @@ async function uploadDocuments(
 
     if (!response.ok) {
       // Attempt to parse error details from the response body
-      let errorDetail = `HTTP error! status: ${response.status}`;
+      let errorDetail = `Erro HTTP! status: ${response.status}`;
       try {
         const errorJson = await response.json();
         errorDetail = errorJson.detail || JSON.stringify(errorJson);
@@ -84,12 +84,12 @@ async function uploadDocuments(
         // If parsing JSON fails, use the status text
         errorDetail = `${errorDetail} - ${response.statusText}`;
       }
-      throw new Error(`Failed to upload documents: ${errorDetail}`);
+      throw new Error(`Falha ao fazer upload dos documentos: ${errorDetail}`);
     }
 
     return await response.json(); // Parse the successful JSON response
   } catch (error) {
-    console.error("Error uploading documents:", error);
+    console.error("Erro ao fazer upload dos documentos:", error);
     throw error; // Re-throw the error for further handling
   }
 }
@@ -206,9 +206,9 @@ export function useRag(): UseRagReturn {
   const initializeDatabase = useCallback(
     async (accessToken?: string) => {
       if (!session?.accessToken && !accessToken) {
-        toast.error("No session found", {
+        toast.error("Sessão não encontrada", {
           richColors: true,
-          description: "Failed to list documents. Please try again.",
+          description: "Falha ao listar documentos. Por favor, tente novamente.",
         });
         return [];
       }
@@ -223,7 +223,7 @@ export function useRag(): UseRagReturn {
       });
       if (!response.ok) {
         throw new Error(
-          `Failed to initialize database: ${response.statusText}`,
+          `Falha ao inicializar banco de dados: ${response.statusText}`,
         );
       }
       const data = await response.json();
@@ -241,9 +241,9 @@ export function useRag(): UseRagReturn {
       accessToken?: string,
     ): Promise<Document[]> => {
       if (!session?.accessToken && !accessToken) {
-        toast.error("No session found", {
+        toast.error("Sessão não encontrada", {
           richColors: true,
-          description: "Failed to list documents. Please try again.",
+          description: "Falha ao listar documentos. Por favor, tente novamente.",
         });
         return [];
       }
@@ -263,7 +263,7 @@ export function useRag(): UseRagReturn {
         },
       });
       if (!response.ok) {
-        throw new Error(`Failed to fetch documents: ${response.statusText}`);
+        throw new Error(`Falha ao buscar documentos: ${response.statusText}`);
       }
       const data = await response.json();
       return data;
@@ -274,15 +274,15 @@ export function useRag(): UseRagReturn {
   const deleteDocument = useCallback(
     async (id: string) => {
       if (!session?.accessToken) {
-        toast.error("No session found", {
+        toast.error("Sessão não encontrada", {
           richColors: true,
-          description: "Failed to delete document. Please try again.",
+          description: "Falha ao excluir documento. Por favor, tente novamente.",
         });
         return;
       }
 
       if (!selectedCollection) {
-        throw new Error("No collection selected");
+        throw new Error("Nenhuma coleção selecionada");
       }
 
       const url = getApiUrlOrThrow();
@@ -295,7 +295,7 @@ export function useRag(): UseRagReturn {
         },
       });
       if (!response.ok) {
-        throw new Error(`Failed to delete document: ${response.statusText}`);
+        throw new Error(`Falha ao excluir documento: ${response.statusText}`);
       }
 
       setDocuments((prevDocs) =>
@@ -308,22 +308,22 @@ export function useRag(): UseRagReturn {
   const handleFileUpload = useCallback(
     async (files: FileList | null, collectionId: string) => {
       if (!session?.accessToken) {
-        toast.error("No session found", {
+        toast.error("Sessão não encontrada", {
           richColors: true,
-          description: "Failed to upload file document(s). Please try again.",
+          description: "Falha ao fazer upload do(s) arquivo(s). Por favor, tente novamente.",
         });
         return;
       }
 
       if (!files || files.length === 0) {
-        console.warn("File upload skipped: No files selected.");
+        console.warn("Upload ignorado: Nenhum arquivo selecionado.");
         return;
       }
 
       const newDocs: Document[] = Array.from(files).map((file) => {
         return new Document({
           id: uuidv4(),
-          pageContent: `Content of ${file.name}`, // Placeholder: Real implementation needs file reading
+          pageContent: `Conteúdo de ${file.name}`, // Placeholder: Implementação real precisa ler o arquivo
           metadata: {
             name: file.name,
             collection: collectionId,
@@ -347,19 +347,19 @@ export function useRag(): UseRagReturn {
   const handleTextUpload = useCallback(
     async (textInput: string, collectionId: string) => {
       if (!session?.accessToken) {
-        toast.error("No session found", {
+        toast.error("Sessão não encontrada", {
           richColors: true,
-          description: "Failed to upload text document. Please try again.",
+          description: "Falha ao fazer upload do texto. Por favor, tente novamente.",
         });
         return;
       }
 
       if (!textInput.trim()) {
-        console.warn("Text upload skipped: Text is empty.");
+        console.warn("Upload ignorado: Texto está vazio.");
         return;
       }
       const textBlob = new Blob([textInput], { type: "text/plain" });
-      const fileName = `Text Document ${new Date().toISOString().slice(0, 19).replace("T", " ")}.txt`;
+      const fileName = `Documento de Texto ${new Date().toISOString().slice(0, 19).replace("T", " ")}.txt`;
       const textFile = new File([textBlob], fileName, { type: "text/plain" });
       const metadata = {
         name: fileName,
@@ -387,9 +387,9 @@ export function useRag(): UseRagReturn {
   const getCollections = useCallback(
     async (accessToken?: string): Promise<Collection[]> => {
       if (!session?.accessToken && !accessToken) {
-        toast.error("No session found", {
+        toast.error("Sessão não encontrada", {
           richColors: true,
-          description: "Failed to fetch collections. Please try again.",
+          description: "Falha ao buscar coleções. Por favor, tente novamente.",
         });
         return [];
       }
@@ -403,7 +403,7 @@ export function useRag(): UseRagReturn {
         },
       });
       if (!response.ok) {
-        throw new Error(`Failed to fetch collections: ${response.statusText}`);
+        throw new Error(`Falha ao buscar coleções: ${response.statusText}`);
       }
       const data = await response.json();
       return data;
@@ -418,9 +418,9 @@ export function useRag(): UseRagReturn {
       accessToken?: string,
     ): Promise<Collection | undefined> => {
       if (!session?.accessToken && !accessToken) {
-        toast.error("No session found", {
+        toast.error("Sessão não encontrada", {
           richColors: true,
-          description: "Failed to create collection. Please try again.",
+          description: "Falha ao criar coleção. Por favor, tente novamente.",
         });
         return;
       }
@@ -430,14 +430,14 @@ export function useRag(): UseRagReturn {
 
       const trimmedName = name.trim();
       if (!trimmedName) {
-        console.error("Collection name cannot be empty.");
+        console.error("Nome da coleção não pode estar vazio.");
         return undefined;
       }
       const nameExists = collections.some(
         (c) => c.name.toLowerCase() === trimmedName.toLowerCase(),
       );
       if (nameExists) {
-        console.warn(`Collection with name "${trimmedName}" already exists.`);
+        console.warn(`Já existe uma coleção com o nome "${trimmedName}"`);
         return undefined;
       }
 
@@ -454,7 +454,7 @@ export function useRag(): UseRagReturn {
         body: JSON.stringify(newCollection),
       });
       if (!response.ok) {
-        console.error(`Failed to create collection: ${response.statusText}`);
+        console.error(`Falha ao criar coleção: ${response.statusText}`);
         return undefined;
       }
       const data = await response.json();
@@ -471,9 +471,9 @@ export function useRag(): UseRagReturn {
       metadata: Record<string, any>,
     ): Promise<Collection | undefined> => {
       if (!session?.accessToken) {
-        toast.error("No session found", {
+        toast.error("Sessão não encontrada", {
           richColors: true,
-          description: "Failed to update collection. Please try again.",
+          description: "Falha ao atualizar coleção. Por favor, tente novamente.",
         });
         return;
       }
@@ -484,7 +484,7 @@ export function useRag(): UseRagReturn {
       );
 
       if (!collectionToUpdate) {
-        toast.error(`Collection with ID "${collectionId}" not found.`, {
+        toast.error(`Coleção com ID "${collectionId}" não encontrada.`, {
           richColors: true,
         });
         return undefined;
@@ -492,7 +492,7 @@ export function useRag(): UseRagReturn {
 
       const trimmedNewName = newName.trim();
       if (!trimmedNewName) {
-        toast.error("Collection name cannot be empty.", { richColors: true });
+        toast.error("Nome da coleção não pode estar vazio.", { richColors: true });
         return undefined;
       }
 
@@ -504,7 +504,7 @@ export function useRag(): UseRagReturn {
       );
       if (nameExists) {
         toast.warning(
-          `Collection with name "${trimmedNewName}" already exists.`,
+          `Já existe uma coleção com o nome "${trimmedNewName}"`,
           { richColors: true },
         );
         return undefined;
@@ -528,7 +528,7 @@ export function useRag(): UseRagReturn {
       });
 
       if (!response.ok) {
-        toast.error(`Failed to update collection: ${response.statusText}`, {
+        toast.error(`Falha ao atualizar coleção: ${response.statusText}`, {
           richColors: true,
         });
         return undefined;
@@ -556,9 +556,9 @@ export function useRag(): UseRagReturn {
   const deleteCollection = useCallback(
     async (collectionId: string): Promise<string | undefined> => {
       if (!session?.accessToken) {
-        toast.error("No session found", {
+        toast.error("Sessão não encontrada", {
           richColors: true,
-          description: "Failed to delete collection. Please try again.",
+          description: "Falha ao excluir coleção. Por favor, tente novamente.",
         });
         return;
       }
@@ -582,7 +582,7 @@ export function useRag(): UseRagReturn {
       });
 
       if (!response.ok) {
-        console.error(`Failed to delete collection: ${response.statusText}`);
+        console.error(`Falha ao excluir coleção: ${response.statusText}`);
         return undefined;
       }
 

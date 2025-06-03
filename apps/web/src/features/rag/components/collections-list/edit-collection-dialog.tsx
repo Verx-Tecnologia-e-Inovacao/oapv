@@ -64,14 +64,14 @@ export function EditCollectionDialog({
           onClick={(e) => e.stopPropagation()}
         >
           <Edit className="mr-2 h-4 w-4" />
-          <span>Edit</span>
+          <span>Editar</span>
         </Button>
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Edit Collection</DialogTitle>
+          <DialogTitle>Editar Coleção</DialogTitle>
           <DialogDescription>
-            Edit the name and description for your collection.
+            Edite o nome e a descrição da sua coleção.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
@@ -80,7 +80,7 @@ export function EditCollectionDialog({
               htmlFor="collection-name"
               className="text-right"
             >
-              Name
+              Nome
             </Label>
             <Input
               id="collection-name"
@@ -94,7 +94,7 @@ export function EditCollectionDialog({
               htmlFor="collection-description"
               className="text-right"
             >
-              Description
+              Descrição
             </Label>
             <div className="col-span-3 space-y-2">
               <Textarea
@@ -103,7 +103,7 @@ export function EditCollectionDialog({
                 onChange={(e) => setDescription(e.target.value)}
               />
               <div className="text-muted-foreground text-right text-xs">
-                {description.length}/{DESCRIPTION_MAX_LENGTH} characters
+                {description.length}/{DESCRIPTION_MAX_LENGTH} caracteres
               </div>
             </div>
           </div>
@@ -112,8 +112,8 @@ export function EditCollectionDialog({
               <Alert variant="destructive">
                 <AlertCircle className="h-4 w-4" />
                 <AlertDescription>
-                  Description exceeds the maximum length of{" "}
-                  {DESCRIPTION_MAX_LENGTH} characters.
+                  A descrição excede o limite máximo de{" "}
+                  {DESCRIPTION_MAX_LENGTH} caracteres.
                 </AlertDescription>
               </Alert>
             </div>
@@ -121,10 +121,11 @@ export function EditCollectionDialog({
         </div>
         <DialogFooter>
           <Button
+            variant="brand"
             onClick={handleSubmit}
             disabled={!hasChanges || isDescriptionTooLong}
           >
-            Save Changes
+            Salvar Alterações
           </Button>
         </DialogFooter>
       </DialogContent>

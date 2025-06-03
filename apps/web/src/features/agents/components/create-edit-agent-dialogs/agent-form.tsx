@@ -78,25 +78,25 @@ export function AgentFieldsForm({
   return (
     <div className="flex flex-col gap-8 py-4">
       <div className="flex w-full flex-col items-start justify-start gap-2 space-y-2">
-        <p className="text-lg font-semibold tracking-tight">Agent Details</p>
+        <p className="text-lg font-semibold tracking-tight">Detalhes do Agente</p>
         <div className="flex w-full flex-col items-start justify-start gap-2">
           <Label htmlFor="oap_name">
-            Name <span className="text-red-500">*</span>
+            Nome <span className="text-red-500">*</span>
           </Label>
           <Input
             id="oap_name"
             {...form.register("name")}
-            placeholder="Emails Agent"
+            placeholder="Agente de Emails"
           />
         </div>
         <div className="flex w-full flex-col items-start justify-start gap-2">
           <Label htmlFor="oap_description">
-            Description <span className="text-red-500">*</span>
+            Descrição <span className="text-red-500">*</span>
           </Label>
           <Textarea
             id="oap_description"
             {...form.register("description")}
-            placeholder="Agent that handles emails"
+            placeholder="Agente que gerencia emails"
           />
         </div>
       </div>
@@ -107,7 +107,7 @@ export function AgentFieldsForm({
             <Separator />
             <div className="flex w-full flex-col items-start justify-start gap-2 space-y-2">
               <p className="text-lg font-semibold tracking-tight">
-                Agent Configuration
+                Configuração do Agente
               </p>
               {configurations.map((c, index) => (
                 <Controller
@@ -143,11 +143,11 @@ export function AgentFieldsForm({
             <Separator />
             <div className="flex w-full flex-col items-start justify-start gap-4">
               <p className="text-lg font-semibold tracking-tight">
-                Agent Tools
+                Ferramentas do Agente
               </p>
               <Search
                 onSearchChange={debouncedSetSearchTerm}
-                placeholder="Search tools..."
+                placeholder="Buscar ferramentas..."
                 className="w-full"
               />
               <div className="relative w-full flex-1 basis-[500px] rounded-md border-[1px] border-slate-200 px-4">
@@ -176,12 +176,12 @@ export function AgentFieldsForm({
                     : null}
                   {displayTools.length === 0 && toolSearchTerm && (
                     <p className="my-4 w-full text-center text-sm text-slate-500">
-                      No tools found matching "{toolSearchTerm}".
+                      Nenhuma ferramenta encontrada para "{toolSearchTerm}".
                     </p>
                   )}
                   {tools.length === 0 && !toolSearchTerm && (
                     <p className="my-4 w-full text-center text-sm text-slate-500">
-                      No tools available for this agent.
+                      Nenhuma ferramenta disponível para este agente.
                     </p>
                   )}
                   {cursor && !toolSearchTerm && (
@@ -205,7 +205,7 @@ export function AgentFieldsForm({
                         }}
                         disabled={loadingMore || loading}
                       >
-                        {loadingMore ? "Loading..." : "Load More Tools"}
+                        {loadingMore ? "Carregando..." : "Carregar Mais Ferramentas"}
                       </Button>
                     </div>
                   )}
@@ -218,7 +218,7 @@ export function AgentFieldsForm({
           <>
             <Separator />
             <div className="flex w-full flex-col items-start justify-start gap-2">
-              <p className="text-lg font-semibold tracking-tight">Agent RAG</p>
+              <p className="text-lg font-semibold tracking-tight">RAG do Agente</p>
               <Controller
                 control={form.control}
                 name={`config.${ragConfigurations[0].label}`}
@@ -240,7 +240,7 @@ export function AgentFieldsForm({
             <Separator />
             <div className="flex w-full flex-col items-start justify-start gap-2">
               <p className="text-lg font-semibold tracking-tight">
-                Supervisor Agents
+                Agentes Supervisores
               </p>
               <Controller
                 control={form.control}

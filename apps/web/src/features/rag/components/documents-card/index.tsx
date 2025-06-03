@@ -136,7 +136,7 @@ export function DocumentsCard({
     if (unsupportedFiles.length > 0) {
       const unsupportedNames = unsupportedFiles.map((f) => f.name).join(", ");
       toast.error(
-        `Unsupported file types: ${unsupportedNames}. Please use PDF, TXT, or HTML.`,
+        `Tipos de arquivo não suportados: ${unsupportedNames}. Use PDF, TXT ou HTML.`,
         { richColors: true },
       );
     }
@@ -157,17 +157,17 @@ export function DocumentsCard({
   const handleUploadStagedFiles = async () => {
     if (!selectedCollection) {
       // Should ideally be handled by disabling the button, but good practice
-      console.error("No collection selected for upload");
+      console.error("Nenhuma coleção selecionada para upload");
       return;
     }
     if (stagedFiles.length === 0) {
       // Should ideally be handled by hiding the button, but good practice
-      console.warn("No files staged for upload");
+      console.warn("Nenhum arquivo preparado para upload");
       return;
     }
 
     setIsUploading(true);
-    const loadingToast = toast.loading("Uploading files", { richColors: true });
+    const loadingToast = toast.loading("Fazendo upload dos arquivos", { richColors: true });
     // Convert File[] to FileList as expected by the hook
     const dataTransfer = new DataTransfer();
     stagedFiles.forEach((file) => dataTransfer.items.add(file));
@@ -175,7 +175,7 @@ export function DocumentsCard({
 
     await handleDocumentFileUpload(fileList, selectedCollection.uuid);
 
-    toast.success("Files uploaded successfully", { richColors: true });
+    toast.success("Arquivos enviados com sucesso", { richColors: true });
     setIsUploading(false);
     toast.dismiss(loadingToast);
     setStagedFiles([]); // Clear staged files after initiating upload
@@ -184,19 +184,19 @@ export function DocumentsCard({
   // Handle text upload (uses document hook)
   const handleTextUpload = async () => {
     if (!selectedCollection) {
-      throw new Error("No collection selected");
+      throw new Error("Nenhuma coleção selecionada");
     }
 
     if (textInput.trim()) {
       setIsUploading(true);
-      const loadingToast = toast.loading("Uploading text document", {
+      const loadingToast = toast.loading("Fazendo upload do documento de texto", {
         richColors: true,
       });
       await handleDocumentTextUpload(textInput, selectedCollection.uuid);
       setTextInput("");
       setIsUploading(false);
       toast.dismiss(loadingToast);
-      toast.success("Text document uploaded successfully", {
+      toast.success("Documento de texto enviado com sucesso", {
         richColors: true,
       });
     }
@@ -204,17 +204,17 @@ export function DocumentsCard({
 
   const handleChatWithDocuments = async (agent: Agent) => {
     if (!selectedCollection) {
-      toast.error("No collection selected", {
+      toast.error("Nenhuma coleção selecionada", {
         richColors: true,
-        description: "Please select a collection to chat with documents.",
+        description: "Por favor, selecione uma coleção para conversar com os documentos.",
       });
       return;
     }
     if (!agent.supportedConfigs?.includes("rag")) {
-      toast.error("Agent does not support rag", {
+      toast.error("Agente não suporta RAG", {
         richColors: true,
         description:
-          "Your default agent does not support RAG. Please contact an administrator to resolve this issue.",
+          "Seu agente padrão não suporta RAG. Por favor, contate um administrador para resolver este problema.",
       });
       return;
     }
@@ -233,14 +233,14 @@ export function DocumentsCard({
       <CardHeader className="flex w-full items-center justify-between">
         <div className="flex flex-col gap-2">
           <CardTitle>
-            {getCollectionName(selectedCollection?.name)} Documents
+            Documentos de {getCollectionName(selectedCollection?.name)}
           </CardTitle>
-          <CardDescription>Manage documents in this collection</CardDescription>
+          <CardDescription>Gerencie documentos nesta coleção</CardDescription>
         </div>
         {defaultAgent && (
           <Button onClick={() => handleChatWithDocuments(defaultAgent)}>
             <MessageSquare className="mr-2 h-3.5 w-3.5" />
-            Chat with your documents
+            Conversar com seus documentos
           </Button>
         )}
       </CardHeader>
@@ -248,8 +248,8 @@ export function DocumentsCard({
         <div className="mb-6">
           <Tabs defaultValue="file">
             <TabsList className="mb-4">
-              <TabsTrigger value="file">Upload File</TabsTrigger>
-              <TabsTrigger value="text">Add Text</TabsTrigger>
+              <TabsTrigger value="file">Upload de Arquivo</TabsTrigger>
+              <TabsTrigger value="text">Adicionar Texto</TabsTrigger>
             </TabsList>
             <TabsContent value="file">
               <div
@@ -260,7 +260,7 @@ export function DocumentsCard({
               >
                 <FileUp className="text-muted-foreground mx-auto mb-2 h-8 w-8" />
                 <p className="text-muted-foreground mb-2 text-sm">
-                  Drag and drop files here or click to browse
+                  Arraste e solte arquivos aqui ou clique para procurar
                 </p>
                 <Input
                   type="file"
@@ -276,14 +276,14 @@ export function DocumentsCard({
                     className="mt-2"
                     asChild
                   >
-                    <span>Select Files</span>
+                    <span>Selecionar Arquivos</span>
                   </Button>
                 </Label>
               </div>
               {/* Staged Files Display */}
               {stagedFiles.length > 0 && (
                 <div className="mt-4 space-y-2">
-                  <h4 className="text-sm font-medium">Files to Upload:</h4>
+                  <h4 className="text-sm font-medium">Arquivos para Upload:</h4>
                   <ul className="space-y-1">
                     {stagedFiles.map((file, index) => (
                       <li
@@ -296,7 +296,7 @@ export function DocumentsCard({
                           size="sm"
                           className="h-6 w-6 p-0"
                           onClick={() => removeStagedFile(index)}
-                          aria-label={`Remove ${file.name}`}
+                          aria-label={`Remover ${file.name}`}
                         >
                           <X className="h-4 w-4" />
                         </Button>
@@ -309,7 +309,7 @@ export function DocumentsCard({
                     className="mt-2 w-full"
                   >
                     <FileUp className="mr-2 h-4 w-4" />
-                    {`Upload ${stagedFiles.length} File(s)`}
+                    {`Upload de ${stagedFiles.length} Arquivo(s)`}
                   </Button>
                 </div>
               )}
@@ -317,7 +317,7 @@ export function DocumentsCard({
             <TabsContent value="text">
               <div className="space-y-4">
                 <Textarea
-                  placeholder="Paste or type your text here..."
+                  placeholder="Cole ou digite seu texto aqui..."
                   className="min-h-[150px]"
                   value={textInput}
                   onChange={(e) => setTextInput(e.target.value)}
@@ -327,7 +327,7 @@ export function DocumentsCard({
                   disabled={!textInput.trim() || isUploading}
                 >
                   <Plus className="mr-2 h-4 w-4" />
-                  Add Text Document
+                  Adicionar Documento de Texto
                 </Button>
               </div>
             </TabsContent>

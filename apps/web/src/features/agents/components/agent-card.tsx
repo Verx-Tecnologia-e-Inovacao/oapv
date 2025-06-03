@@ -54,7 +54,7 @@ function SupportedConfigBadge({
             </Badge>
           )}
         </TooltipTrigger>
-        <TooltipContent>This agent supports {type}.</TooltipContent>
+        <TooltipContent>Este agente suporta {type}.</TooltipContent>
       </Tooltip>
     </TooltipProvider>
   );
@@ -95,7 +95,7 @@ export function AgentCard({ agent, showDeployment }: AgentCardProps) {
                         </Badge>
                       </TooltipTrigger>
                       <TooltipContent>
-                        The deployment the graph & agent belongs to.
+                        O deployment ao qual o grafo e o agente pertencem.
                       </TooltipContent>
                     </Tooltip>
 
@@ -107,7 +107,7 @@ export function AgentCard({ agent, showDeployment }: AgentCardProps) {
                         </Badge>
                       </TooltipTrigger>
                       <TooltipContent>
-                        The graph the agent belongs to.
+                        O grafo ao qual o agente pertence.
                       </TooltipContent>
                     </Tooltip>
                   </TooltipProvider>
@@ -138,7 +138,7 @@ export function AgentCard({ agent, showDeployment }: AgentCardProps) {
               onClick={() => setShowEditDialog(true)}
             >
               <Edit className="mr-2 h-3.5 w-3.5" />
-              Edit
+              Editar
             </Button>
           )}
           <NextLink
@@ -147,7 +147,7 @@ export function AgentCard({ agent, showDeployment }: AgentCardProps) {
           >
             <Button size="sm">
               <MessageSquare className="mr-2 h-3.5 w-3.5" />
-              Chat
+              Conversar
             </Button>
           </NextLink>
         </CardFooter>

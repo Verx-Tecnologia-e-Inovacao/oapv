@@ -41,7 +41,7 @@ export function CollectionsCard({
 
   // Handle creating a new collection (uses hook)
   const handleCreateCollection = async (name: string, description: string) => {
-    const loadingToast = toast.loading("Creating collection", {
+    const loadingToast = toast.loading("Criando coleção", {
       richColors: true,
     });
     const success = await createCollection(name, {
@@ -50,10 +50,10 @@ export function CollectionsCard({
     toast.dismiss(loadingToast);
     if (success) {
       setOpen(false);
-      toast.success("Collection created successfully", { richColors: true });
+      toast.success("Coleção criada com sucesso", { richColors: true });
     } else {
       toast.warning(
-        `Collection named '${name}' could not be created (likely already exists).`,
+        `Coleção com nome '${name}' não pôde ser criada (provavelmente já existe).`,
         {
           duration: 5000,
           richColors: true,
@@ -64,16 +64,16 @@ export function CollectionsCard({
 
   // Handle deleting a collection (uses collection hook and document hook)
   const handleDeleteCollection = async (id: string) => {
-    const loadingToast = toast.loading("Deleting collection", {
+    const loadingToast = toast.loading("Excluindo coleção", {
       richColors: true,
     });
     await deleteCollection(id);
     toast.dismiss(loadingToast);
-    toast.success("Collection deleted successfully", { richColors: true });
+    toast.success("Coleção excluída com sucesso", { richColors: true });
     if (selectedCollection?.uuid === id) {
       const newSelectedCollection = collections.find((c) => c.uuid !== id);
       if (!newSelectedCollection) {
-        toast.error("No collections remaining.", { richColors: true });
+        toast.error("Nenhuma coleção restante.", { richColors: true });
         return;
       }
       setSelectedCollection(newSelectedCollection);
@@ -88,18 +88,18 @@ export function CollectionsCard({
     name: string,
     metadata: Record<string, any>,
   ) => {
-    const loadingToast = toast.loading("Updating collection", {
+    const loadingToast = toast.loading("Atualizando coleção", {
       richColors: true,
     });
     await updateCollection(id, name, metadata);
     toast.dismiss(loadingToast);
-    toast.success("Collection updated successfully", { richColors: true });
+    toast.success("Coleção atualizada com sucesso", { richColors: true });
   };
 
   return (
     <Card>
       <CardHeader className="flex flex-row items-center justify-between">
-        <CardTitle>Collections</CardTitle>
+        <CardTitle>Coleções</CardTitle>
         <CreateCollectionDialog
           open={open}
           onOpenChange={setOpen}

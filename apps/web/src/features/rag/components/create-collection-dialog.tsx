@@ -64,9 +64,9 @@ export function CreateCollectionDialog({
       </DialogTrigger>
       <DialogContent>
         <DialogHeader>
-          <DialogTitle>Create New Collection</DialogTitle>
+          <DialogTitle>Criar Nova Coleção</DialogTitle>
           <DialogDescription>
-            Enter a name for your new collection.
+            Digite um nome para sua nova coleção.
           </DialogDescription>
         </DialogHeader>
         <div className="grid gap-4 py-4">
@@ -75,7 +75,7 @@ export function CreateCollectionDialog({
               htmlFor="collection-name"
               className="text-right"
             >
-              Name
+              Nome
             </Label>
             <Input
               id="collection-name"
@@ -99,7 +99,7 @@ export function CreateCollectionDialog({
               />
               <div className="text-muted-foreground text-right text-xs">
                 {newCollectionDescription.length}/{DESCRIPTION_MAX_LENGTH}{" "}
-                characters
+                caracteres
               </div>
             </div>
           </div>
@@ -108,8 +108,8 @@ export function CreateCollectionDialog({
               <Alert variant="destructive">
                 <AlertCircle className="h-4 w-4" />
                 <AlertDescription>
-                  Description exceeds the maximum length of{" "}
-                  {DESCRIPTION_MAX_LENGTH} characters.
+                  A descrição excede o limite máximo de{" "}
+                  {DESCRIPTION_MAX_LENGTH} caracteres.
                 </AlertDescription>
               </Alert>
             </div>
@@ -118,11 +118,12 @@ export function CreateCollectionDialog({
         <DialogFooter>
           <Button
             onClick={handleSubmit}
+            variant="brand"
             disabled={
               !newCollectionName.trim() || isDescriptionTooLong || loading
             }
           >
-            Create
+            Criar
           </Button>
         </DialogFooter>
       </DialogContent>

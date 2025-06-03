@@ -56,7 +56,7 @@ function EditAgentDialogContent({
     config: Record<string, any>;
   }) => {
     if (!data.name || !data.description) {
-      toast.warning("Name and description are required");
+      toast.warning("Nome e descrição são obrigatórios");
       return;
     }
 
@@ -67,13 +67,13 @@ function EditAgentDialogContent({
     );
 
     if (!updatedAgent) {
-      toast.error("Failed to update agent", {
-        description: "Please try again",
+      toast.error("Falha ao atualizar agente", {
+        description: "Por favor, tente novamente",
       });
       return;
     }
 
-    toast.success("Agent updated successfully!");
+    toast.success("Agente atualizado com sucesso!");
 
     onClose();
     refreshAgents();
@@ -85,13 +85,13 @@ function EditAgentDialogContent({
     setDeleteSubmitting(false);
 
     if (!deleted) {
-      toast.error("Failed to delete agent", {
-        description: "Please try again",
+      toast.error("Falha ao excluir agente", {
+        description: "Por favor, tente novamente",
       });
       return;
     }
 
-    toast.success("Agent deleted successfully!");
+    toast.success("Agente excluído com sucesso!");
 
     onClose();
     refreshAgents();
@@ -103,11 +103,10 @@ function EditAgentDialogContent({
         <AlertDialogHeader>
           <div className="flex items-start justify-between gap-4">
             <div className="flex flex-col gap-1.5">
-              <AlertDialogTitle>Edit Agent</AlertDialogTitle>
+              <AlertDialogTitle>Editar Agente</AlertDialogTitle>
               <AlertDialogDescription>
-                Edit the agent for &apos;
-                <span className="font-medium">{agent.graph_id}</span>&apos;
-                graph.
+                Editar o agente do grafo &apos;
+                <span className="font-medium">{agent.graph_id}</span>&apos;.
               </AlertDialogDescription>
             </div>
             <AlertDialogCancel size="icon">
@@ -140,7 +139,7 @@ function EditAgentDialogContent({
             ) : (
               <Trash />
             )}
-            <span>{deleteSubmitting ? "Deleting..." : "Delete Agent"}</span>
+            <span>{deleteSubmitting ? "Excluindo..." : "Excluir Agente"}</span>
           </Button>
           <Button
             type="submit"
@@ -153,7 +152,7 @@ function EditAgentDialogContent({
               <Bot />
             )}
             <span>
-              {form.formState.isSubmitting ? "Saving..." : "Save Changes"}
+              {form.formState.isSubmitting ? "Salvando..." : "Salvar Alterações"}
             </span>
           </Button>
         </AlertDialogFooter>

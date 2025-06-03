@@ -68,7 +68,7 @@ export function TemplateCard({
                   ) : (
                     <ChevronRight className="h-4 w-4" />
                   )}
-                  <span className="sr-only">Toggle</span>
+                  <span className="sr-only">Alternar</span>
                 </Button>
               </CollapsibleTrigger>
               <CardTitle className="flex items-center gap-2">
@@ -79,8 +79,8 @@ export function TemplateCard({
                       <Badge variant="outline">{deployment.name}</Badge>
                     </TooltipTrigger>
                     <TooltipContent className="max-w-[350px]">
-                      The deployment the graph belongs to. Deployments typically
-                      contain a collection of similar, or related graphs.
+                      O deployment ao qual o grafo pertence. Deployments geralmente
+                      contêm uma coleção de grafos similares ou relacionados.
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>
@@ -89,7 +89,7 @@ export function TemplateCard({
           </div>
           <div className="flex items-center gap-2">
             <Badge variant="outline">
-              {agentsCount} Agent{agentsCount === 1 ? "" : "s"}
+              {agentsCount} Agente{agentsCount === 1 ? "" : "s"}
             </Badge>
           </div>
         </CardHeader>

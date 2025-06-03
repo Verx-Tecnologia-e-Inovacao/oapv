@@ -51,10 +51,10 @@ export function DocumentsTable({
     <Table>
       <TableHeader>
         <TableRow>
-          <TableHead>Document Name</TableHead>
-          <TableHead>Collection</TableHead>
-          <TableHead>Date Uploaded</TableHead>
-          <TableHead className="text-right">Actions</TableHead>
+          <TableHead>Nome do Documento</TableHead>
+          <TableHead>Coleção</TableHead>
+          <TableHead>Data de Upload</TableHead>
+          <TableHead className="text-right">Ações</TableHead>
         </TableRow>
       </TableHeader>
       <TableBody>
@@ -64,7 +64,7 @@ export function DocumentsTable({
               colSpan={4}
               className="text-muted-foreground text-center"
             >
-              No documents found in this collection.
+              Nenhum documento encontrado nesta coleção.
             </TableCell>
           </TableRow>
         ) : (
@@ -97,7 +97,7 @@ export function DocumentsTable({
                           disabled={actionsDisabled}
                         >
                           <Trash2 className="mr-2 h-4 w-4" />
-                          Delete
+                          Excluir
                         </DropdownMenuItem>
                       </AlertDialogTrigger>
                     </DropdownMenuContent>
@@ -105,11 +105,11 @@ export function DocumentsTable({
                   <AlertDialogContent>
                     <AlertDialogHeader>
                       <AlertDialogTitle>
-                        Are you absolutely sure?
+                        Tem certeza absoluta?
                       </AlertDialogTitle>
                       <AlertDialogDescription>
-                        This action cannot be undone. This will permanently
-                        delete the document
+                        Esta ação não pode ser desfeita. Isso excluirá permanentemente
+                        o documento
                         <span className="font-semibold">
                           {" "}
                           {doc.metadata.name}
@@ -118,7 +118,7 @@ export function DocumentsTable({
                       </AlertDialogDescription>
                     </AlertDialogHeader>
                     <AlertDialogFooter>
-                      <AlertDialogCancel>Cancel</AlertDialogCancel>
+                      <AlertDialogCancel>Cancelar</AlertDialogCancel>
                       <AlertDialogAction
                         onClick={async () =>
                           await deleteDocument(doc.metadata.file_id)
