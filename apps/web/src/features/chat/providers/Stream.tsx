@@ -54,12 +54,12 @@ const StreamSession = ({
   useProxyRoute?: boolean;
 }) => {
   if (!useProxyRoute && !accessToken) {
-    toast.error("Access token must be provided if not using proxy route");
+    toast.error("Token de acesso deve ser fornecido se não estiver usando rota de proxy");
   }
 
   const deployment = getDeployments().find((d) => d.id === deploymentId);
   if (!deployment) {
-    throw new Error(`Deployment ${deploymentId} not found`);
+    throw new Error(`Deployment ${deploymentId} não encontrado`);
   }
 
   let deploymentUrl = deployment.deploymentUrl;
@@ -133,7 +133,7 @@ export const StreamProvider: React.FC<{ children: ReactNode }> = ({
 
   const handleStartChat = () => {
     if (!value) {
-      toast.info("Please select an agent");
+      toast.info("Por favor, selecione um agente antes de iniciar");
       return;
     }
     const [agentId_, deploymentId_] = value.split(":");
@@ -181,7 +181,7 @@ export const StreamProvider: React.FC<{ children: ReactNode }> = ({
 
   const useProxyRoute = process.env.NEXT_PUBLIC_USE_LANGSMITH_AUTH === "true";
   if (!useProxyRoute && !session?.accessToken) {
-    toast.error("Access token must be provided if not using proxy route");
+    toast.error("Token de acesso deve ser fornecido se não estiver usando rota de proxy");
     return null;
   }
 
@@ -201,7 +201,7 @@ export const StreamProvider: React.FC<{ children: ReactNode }> = ({
 export const useStreamContext = (): StreamContextType => {
   const context = useContext(StreamContext);
   if (context === undefined) {
-    throw new Error("useStreamContext must be used within a StreamProvider");
+    throw new Error("useStreamContext deve ser usado dentro de um StreamProvider");
   }
   return context;
 };

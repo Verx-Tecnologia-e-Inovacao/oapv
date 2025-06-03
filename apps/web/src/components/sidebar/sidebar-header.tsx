@@ -24,7 +24,7 @@ export function SiteHeader() {
 
               <div className="grid flex-1 pl-2 text-left text-sm leading-tight transition-all group-data-[collapsible=icon]:pl-0 group-data-[collapsible=icon]:opacity-0">
                 <span className="truncate font-semibold text-[#e43348]">
-                  VIA - Agentes Inteligentes
+                  Plataforma de Agentes
                 </span>
               </div>
             </NextLink>

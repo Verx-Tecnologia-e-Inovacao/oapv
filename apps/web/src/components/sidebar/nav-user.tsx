@@ -39,7 +39,7 @@ export function NavUser() {
   // Use auth user if available, otherwise use default user
   const displayUser = authUser
     ? {
-        name: authUser.displayName || authUser.email?.split("@")[0] || "User",
+        name: authUser.displayName || authUser.email?.split("@")[0] || "Usuário",
         email: authUser.email || "",
         avatar: authUser.avatarUrl || "",
         company: authUser.companyName || "",
@@ -47,8 +47,8 @@ export function NavUser() {
         lastName: authUser.lastName || "",
       }
     : {
-        name: "Guest",
-        email: "Not signed in",
+        name: "Visitante",
+        email: "Não autenticado",
         avatar: "",
         company: "",
         firstName: "",
@@ -61,15 +61,15 @@ export function NavUser() {
       const { error } = await signOut();
 
       if (error) {
-        console.error("Error signing out:", error);
-        toast.error("Error signing out", { richColors: true });
+        console.error("Erro ao sair:", error);
+        toast.error("Erro ao sair", { richColors: true });
         return;
       }
 
       router.push("/signin");
     } catch (err) {
-      console.error("Error during sign out:", err);
-      toast.error("Error signing out", { richColors: true });
+      console.error("Erro durante saída:", err);
+      toast.error("Erro ao sair", { richColors: true });
     } finally {
       setIsSigningOut(false);
     }
@@ -81,7 +81,7 @@ export function NavUser() {
 
   const handleClearLocalData = () => {
     resetStore();
-    toast.success("Local data cleared. Please refresh the page.", {
+    toast.success("Dados locais limpos. Por favor, recarregue a página.", {
       richColors: true,
     });
   };
@@ -157,25 +157,25 @@ export function NavUser() {
                 {isSigningOut ? (
                   <>
                     <Loader2 className="mr-2 h-4 w-4 animate-spin" />
-                    Signing out...
+                    Saindo...
                   </>
                 ) : (
                   <>
                     <LogOut className="mr-2 h-4 w-4" />
-                    Sign out
+                    Sair
                   </>
                 )}
               </DropdownMenuItem>
             ) : (
               <DropdownMenuItem onClick={handleSignIn}>
                 <User className="mr-2 h-4 w-4" />
-                Sign in
+                Entrar
               </DropdownMenuItem>
             )}
             {!isProdEnv && (
               <DropdownMenuItem onClick={handleClearLocalData}>
                 <TriangleAlert className="mr-2 h-4 w-4 text-red-500" />
-                Clear local data
+                Limpar dados locais
               </DropdownMenuItem>
             )}
           </DropdownMenuContent>
