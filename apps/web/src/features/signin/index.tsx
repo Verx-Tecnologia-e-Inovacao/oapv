@@ -183,6 +183,7 @@ export default function SigninInterface() {
             <Button
               type="submit"
               className="w-full"
+              variant="brand"
               disabled={isLoading || isSuccess}
             >
               {isLoading
