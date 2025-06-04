@@ -47,3 +47,5 @@ credentials.json
 .langgraph_api
 
 **/.claude/settings.local.json
+
+.windsurf
