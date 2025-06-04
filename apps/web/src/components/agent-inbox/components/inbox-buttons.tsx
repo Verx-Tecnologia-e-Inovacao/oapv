@@ -41,7 +41,6 @@ function InboxButton({
 }) {
   return (
     <Button
-      variant="brand"
       onClick={onClick}
       className={cn(
         "text-[16px] leading-6 font-medium",
