@@ -146,6 +146,7 @@ export default function ResetPasswordInterface() {
 
             <Button
               type="submit"
+              variant="brand"
               className="w-full"
               disabled={isLoading}
             >

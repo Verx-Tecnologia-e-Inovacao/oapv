@@ -56,6 +56,7 @@ export default function EmptyCollectionsState() {
           onSubmit={handleSubmit}
           trigger={
             <Button
+              variant="brand"
               size="lg"
               className="mt-4 gap-2"
             >

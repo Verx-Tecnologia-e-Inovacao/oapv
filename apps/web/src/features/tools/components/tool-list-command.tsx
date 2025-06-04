@@ -42,7 +42,7 @@ export function ToolListCommand({
         className={className}
       >
         <Button
-          variant="outline"
+          variant="brand"
           role="combobox"
           aria-expanded={open}
           className="w-[400px] justify-between"
@@ -88,7 +88,7 @@ export function ToolListCommand({
             {cursor && (
               <div className="border-t p-1">
                 <Button
-                  variant="outline"
+                  variant="brand"
                   className="w-full justify-center"
                   disabled={loadingMore}
                   onClick={async () => {

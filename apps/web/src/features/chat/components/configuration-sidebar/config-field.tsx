@@ -127,7 +127,7 @@ export function ConfigField({
       } else {
         store.updateConfig(agentId, id, jsonString);
       }
-      setJsonError("Invalid JSON format");
+      setJsonError("Formato JSON inválido");
     }
   };
 
@@ -140,7 +140,7 @@ export function ConfigField({
     } catch (_) {
       // If formatting fails (because input is not valid JSON), set the error state
       // Do not change the underlying value that failed to parse/format
-      setJsonError("Invalid JSON format");
+      setJsonError("Formato JSON inválido");
     }
   };
 
@@ -252,7 +252,7 @@ export function ConfigField({
         >
           <SelectTrigger>
             {/* Display selected value or placeholder */}
-            <SelectValue placeholder={placeholder || "Select an option"} />
+            <SelectValue placeholder={placeholder || "Selecione uma opção"} />
           </SelectTrigger>
           <SelectContent>
             {/* Add a placeholder/default option if needed */}
@@ -467,7 +467,7 @@ export function ConfigFieldRAG({
 
   const getCollectionNameFromId = (collectionId: string) => {
     const collection = collections.find((c) => c.uuid === collectionId);
-    return collection?.name ?? "Unknown Collection";
+    return collection?.name ?? "Coleção desconhecida";
   };
 
   return (
@@ -476,7 +476,7 @@ export function ConfigFieldRAG({
         htmlFor={id}
         className="text-sm font-medium"
       >
-        Selected Collections
+        Coleções selecionadas
       </Label>
       <Popover
         open={open}
@@ -491,9 +491,9 @@ export function ConfigFieldRAG({
           >
             {selectedCollections.length > 0
               ? selectedCollections.length > 1
-                ? `${selectedCollections.length} collections selected`
+                ? `${selectedCollections.length} coleções selecionadas`
                 : getCollectionNameFromId(selectedCollections[0])
-              : "Select collections"}
+              : "Selecione coleções"}
             <ChevronsUpDown className="ml-2 h-4 w-4 shrink-0 opacity-50" />
           </Button>
         </PopoverTrigger>
@@ -502,9 +502,9 @@ export function ConfigFieldRAG({
           align="start"
         >
           <Command className="w-full">
-            <CommandInput placeholder="Search collections..." />
+            <CommandInput placeholder="Buscar coleções..." />
             <CommandList>
-              <CommandEmpty>No collections found.</CommandEmpty>
+              <CommandEmpty>Nenhuma coleção encontrada.</CommandEmpty>
               <CommandGroup>
                 {collections.map((collection) => (
                   <CommandItem
@@ -589,7 +589,7 @@ export function ConfigFieldAgents({
         (d) => d.id === deploymentId,
       )?.deploymentUrl;
       if (!deployment_url) {
-        toast.error("Deployment not found");
+        toast.error("Implantação não encontrada");
       }
 
       return {
@@ -624,7 +624,7 @@ export function ConfigFieldAgents({
       />
 
       <p className="text-xs text-gray-500">
-        The agents to make available to this supervisor.
+        Os agentes disponíveis para este supervisor.
       </p>
     </div>
   );

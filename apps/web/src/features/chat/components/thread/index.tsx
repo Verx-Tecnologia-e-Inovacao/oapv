@@ -192,7 +192,7 @@ function NewThreadButton(props: { hasMessages: boolean }) {
           tooltip={
             isMac ? "Nova conversa (Cmd+Shift+O)" : "Nova conversa (Ctrl+Shift+O)"
           }
-          variant="outline"
+          variant="brand"
           onClick={handleNewThread}
           style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}
         >
@@ -495,6 +495,7 @@ export function Thread() {
                     />
                     {stream.isLoading ? (
                       <Button
+                        variant="brand"
                         key="stop"
                         onClick={() => stream.stop()}
                         className="ml-auto"
@@ -504,6 +505,7 @@ export function Thread() {
                       </Button>
                     ) : (
                       <Button
+                        variant="brand"
                         type="submit"
                         className="ml-auto shadow-md transition-all"
                         disabled={

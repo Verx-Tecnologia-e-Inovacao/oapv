@@ -295,7 +295,7 @@ export function DocumentsCard({
                       >
                         <span className="truncate pr-2">{file.name}</span>
                         <Button
-                          variant="ghost"
+                          variant="brand"
                           size="sm"
                           className="h-6 w-6 p-0"
                           onClick={() => removeStagedFile(index)}
@@ -307,6 +307,7 @@ export function DocumentsCard({
                     ))}
                   </ul>
                   <Button
+                    variant="brand"
                     onClick={handleUploadStagedFiles}
                     disabled={!selectedCollection || isUploading}
                     className="mt-2 w-full"
