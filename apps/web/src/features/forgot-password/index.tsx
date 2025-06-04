@@ -100,6 +100,7 @@ export default function ForgotPasswordInterface() {
 
               <Button
                 type="submit"
+                variant="brand"
                 className="w-full"
                 disabled={isLoading}
               >

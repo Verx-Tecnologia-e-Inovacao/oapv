@@ -42,6 +42,7 @@ export function AgentList({ agents, deploymentId }: AgentListProps) {
           />
         </div>
         <Button
+          variant="brand"
           size="sm"
           onClick={() => setShowCreateDialog(true)}
         >

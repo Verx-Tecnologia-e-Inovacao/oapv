@@ -140,6 +140,7 @@ export default function ToolsPlaygroundInterface() {
             </p>
           </div>
           <Button
+            variant="brand"
             onClick={handleSubmit}
             disabled={isLoading}
           >

@@ -34,7 +34,7 @@ export function ToolCard({ tool }: ToolCardProps) {
       </CardHeader>
       <CardFooter className="mt-auto flex items-center justify-between">
         <NextLink href={`/tools/playground?tool=${tool.name}`}>
-          <Button variant="outline">
+          <Button variant="brand">
             <FlaskConical className="size-4" />
             <p>Playground</p>
           </Button>

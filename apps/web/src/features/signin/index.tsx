@@ -129,7 +129,7 @@ export default function SigninInterface() {
                 {showManualRedirect && (
                   <Button
                     onClick={() => router.push("/")}
-                    variant="outline"
+                    variant="brand"
                     className="mt-2 border-green-300 text-green-700 hover:bg-green-100"
                   >
                     Ir para o Dashboard Agora
@@ -208,7 +208,7 @@ export default function SigninInterface() {
               </div>
 
               <Button
-                variant="outline"
+                variant="brand"
                 type="button"
                 className="flex w-full items-center justify-center gap-2"
                 onClick={handleGoogleSignIn}

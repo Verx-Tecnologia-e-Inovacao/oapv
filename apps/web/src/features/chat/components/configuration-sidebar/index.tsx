@@ -75,16 +75,16 @@ function NameAndDescriptionAlertDialog({
     >
       <AlertDialogContent>
         <AlertDialogHeader>
-          <AlertDialogTitle>Agent Name and Description</AlertDialogTitle>
+          <AlertDialogTitle>Nome e Descrição do Agente</AlertDialogTitle>
           <AlertDialogDescription>
-            Please give your new agent a name and optional description.
+            Por favor, dê um nome e uma descrição opcional para seu novo agente.
           </AlertDialogDescription>
         </AlertDialogHeader>
         <div className="flex flex-col gap-4 p-4">
           <div className="flex flex-col gap-2">
-            <Label htmlFor="name">Name</Label>
+            <Label htmlFor="name">Nome</Label>
             <Input
-              placeholder="Agent Name"
+              placeholder="Nome do Agente"
               id="name"
               value={name}
               onChange={(e) => setName(e.target.value)}
@@ -92,9 +92,9 @@ function NameAndDescriptionAlertDialog({
             />
           </div>
           <div className="flex flex-col gap-2">
-            <Label htmlFor="description">Description</Label>
+            <Label htmlFor="description">Descrição</Label>
             <Input
-              placeholder="Agent Description"
+              placeholder="Descrição do Agente"
               id="description"
               value={description}
               onChange={(e) => setDescription(e.target.value)}
@@ -102,9 +102,9 @@ function NameAndDescriptionAlertDialog({
           </div>
         </div>
         <AlertDialogFooter>
-          <AlertDialogCancel>Cancel</AlertDialogCancel>
+          <AlertDialogCancel>Cancelar</AlertDialogCancel>
           <AlertDialogAction onClick={handleSaveAgent}>
-            Submit
+            Confirmar
           </AlertDialogAction>
         </AlertDialogFooter>
       </AlertDialogContent>
@@ -177,7 +177,7 @@ export const ConfigurationSidebar = forwardRef<
       (a) => a.assistant_id === agentId && a.deploymentId === deploymentId,
     );
     if (!selectedAgent) {
-      toast.error("Failed to get agent config.", { richColors: true });
+      toast.error("Falha ao obter configuração do agente.", { richColors: true });
       return;
     }
 
@@ -190,9 +190,9 @@ export const ConfigurationSidebar = forwardRef<
       (a) => a.assistant_id === agentId && a.deploymentId === deploymentId,
     );
     if (!selectedAgent) {
-      toast.error("Failed to save config.", {
+      toast.error("Falha ao salvar configuração.", {
         richColors: true,
-        description: "Unable to find selected agent.",
+        description: "Não foi possível encontrar o agente selecionado.",
       });
       return;
     }
@@ -206,7 +206,7 @@ export const ConfigurationSidebar = forwardRef<
         config: configsByAgentId[agentId],
       });
       if (!newAgent) {
-        toast.error("Failed to create agent", { richColors: true });
+        toast.error("Falha ao criar agente", { richColors: true });
         return;
       }
       // Reload the page, using the new assistant ID and deployment ID
@@ -223,11 +223,11 @@ export const ConfigurationSidebar = forwardRef<
       config: configsByAgentId[agentId],
     });
     if (!updatedAgent) {
-      toast.error("Failed to update agent configuration");
+      toast.error("Falha ao atualizar configuração do agente");
       return;
     }
 
-    toast.success("Agent configuration saved successfully");
+    toast.success("Configuração do agente salva com sucesso");
   };
 
   return (
@@ -242,7 +242,7 @@ export const ConfigurationSidebar = forwardRef<
       {open && (
         <div className="flex h-full flex-col">
           <div className="flex flex-shrink-0 items-center justify-between border-b border-gray-200 p-4">
-            <h2 className="text-lg font-semibold">Agent Configuration</h2>
+            <h2 className="text-lg font-semibold">Configuração do Agente</h2>
             <div className="flex gap-2">
               <TooltipProvider>
                 <Tooltip delayDuration={200}>
@@ -256,26 +256,27 @@ export const ConfigurationSidebar = forwardRef<
                       }}
                     >
                       <Trash2 className="mr-1 h-4 w-4" />
-                      Reset
+                      Redefinir
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>Reset the configuration to the last saved state</p>
+                    <p>Redefinir a configuração para o último estado salvo</p>
                   </TooltipContent>
                 </Tooltip>
 
                 <Tooltip delayDuration={200}>
                   <TooltipTrigger asChild>
                     <Button
+                      variant="brand"
                       size="sm"
                       onClick={handleSave}
                     >
                       <Save className="mr-1 h-4 w-4" />
-                      Save
+                      Salvar
                     </Button>
                   </TooltipTrigger>
                   <TooltipContent>
-                    <p>Save your changes to the agent</p>
+                    <p>Salvar suas alterações no agente</p>
                   </TooltipContent>
                 </Tooltip>
               </TooltipProvider>
@@ -286,7 +287,7 @@ export const ConfigurationSidebar = forwardRef<
               <Alert variant="info">
                 <Lightbulb className="size-4" />
                 <AlertTitle>
-                  Pro Tip
+                  Dica
                   <Button
                     size="icon"
                     variant="ghost"
@@ -297,8 +298,8 @@ export const ConfigurationSidebar = forwardRef<
                   </Button>
                 </AlertTitle>
                 <AlertDescription>
-                  Changes made to the configuration will be saved automatically,
-                  but will only persist across sessions if you click "Save".
+                  As alterações feitas na configuração serão salvas automaticamente,
+                  mas só serão mantidas entre sessões se você clicar em "Salvar".
                 </AlertDescription>
               </Alert>
             </div>
@@ -308,15 +309,15 @@ export const ConfigurationSidebar = forwardRef<
             className="flex flex-1 flex-col overflow-y-auto"
           >
             <TabsList className="flex-shrink-0 justify-start bg-transparent px-4 pt-2">
-              <TabsTrigger value="general">General</TabsTrigger>
+              <TabsTrigger value="general">Geral</TabsTrigger>
               {supportedConfigs.includes("tools") && (
-                <TabsTrigger value="tools">Tools</TabsTrigger>
+                <TabsTrigger value="tools">Ferramentas</TabsTrigger>
               )}
               {supportedConfigs.includes("rag") && (
                 <TabsTrigger value="rag">RAG</TabsTrigger>
               )}
               {supportedConfigs.includes("supervisor") && (
-                <TabsTrigger value="supervisor">Supervisor Agents</TabsTrigger>
+                <TabsTrigger value="supervisor">Agentes Supervisores</TabsTrigger>
               )}
             </TabsList>
 
@@ -325,7 +326,7 @@ export const ConfigurationSidebar = forwardRef<
                 value="general"
                 className="m-0 p-4"
               >
-                <ConfigSection title="Configuration">
+                <ConfigSection title="Configuração">
                   {loading || !agentId ? (
                     <div className="space-y-4">
                       <Skeleton className="h-8 w-full" />
@@ -359,10 +360,10 @@ export const ConfigurationSidebar = forwardRef<
                   value="tools"
                   className="m-0 overflow-y-auto p-4"
                 >
-                  <ConfigSection title="Available Tools">
+                  <ConfigSection title="Ferramentas Disponíveis">
                     <Search
                       onSearchChange={debouncedSetSearchTerm}
-                      placeholder="Search tools..."
+                      placeholder="Buscar ferramentas..."
                     />
                     <div className="flex-1 space-y-4 overflow-y-auto rounded-md">
                       {agentId &&
@@ -381,17 +382,17 @@ export const ConfigurationSidebar = forwardRef<
                         displayTools.length === 0 &&
                         toolSearchTerm && (
                           <p className="mt-4 text-center text-sm text-slate-500">
-                            No tools found matching "{toolSearchTerm}".
+                            Nenhuma ferramenta encontrada com "{toolSearchTerm}".
                           </p>
                         )}
                       {!agentId && (
                         <p className="mt-4 text-center text-sm text-slate-500">
-                          Select an agent to see tools.
+                          Selecione um agente para ver as ferramentas.
                         </p>
                       )}
                       {agentId && tools.length === 0 && !toolSearchTerm && (
                         <p className="mt-4 text-center text-sm text-slate-500">
-                          No tools available for this agent.
+                          Nenhuma ferramenta disponível para este agente.
                         </p>
                       )}
                       {cursor && !toolSearchTerm && (
@@ -418,7 +419,7 @@ export const ConfigurationSidebar = forwardRef<
                             }}
                             disabled={loadingMore || loading}
                           >
-                            {loadingMore ? "Loading..." : "Load More Tools"}
+                            {loadingMore ? "Carregando..." : "Carregar mais"}
                           </Button>
                         </div>
                       )}
@@ -432,7 +433,7 @@ export const ConfigurationSidebar = forwardRef<
                   value="rag"
                   className="m-0 overflow-y-auto p-4"
                 >
-                  <ConfigSection title="Agent RAG">
+                  <ConfigSection title="RAG do Agente">
                     {agentId && (
                       <ConfigFieldRAG
                         id={ragConfigurations[0].label}
@@ -449,7 +450,7 @@ export const ConfigurationSidebar = forwardRef<
                   value="supervisor"
                   className="m-0 overflow-y-auto p-4"
                 >
-                  <ConfigSection title="Supervisor Agents">
+                  <ConfigSection title="Agentes Supervisores">
                     {agentId && (
                       <ConfigFieldAgents
                         id={agentsConfigurations[0].label}

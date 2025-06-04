@@ -143,6 +143,7 @@ function EditAgentDialogContent({
           </Button>
           <Button
             type="submit"
+            variant="brand"
             className="flex w-full items-center justify-center gap-1"
             disabled={loading || form.formState.isSubmitting}
           >
