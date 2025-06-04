@@ -327,6 +327,7 @@ export function DocumentsCard({
                   onChange={(e) => setTextInput(e.target.value)}
                 />
                 <Button
+                  variant="brand"
                   onClick={handleTextUpload}
                   disabled={!textInput.trim() || isUploading}
                 >
