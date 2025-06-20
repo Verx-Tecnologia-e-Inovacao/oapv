@@ -170,9 +170,20 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
 
   // Determine body based on method
   let body: BodyInit | null | undefined = undefined;
-  if (req.method !== "GET" && req.method !== "HEAD") {
+  /* if (req.method !== "GET" && req.method !== "HEAD") {
     // For POST, PUT, PATCH, DELETE etc., forward the body
     body = req.body;
+  } */
+
+  if (req.method !== "GET" && req.method !== "HEAD") {
+    const contentType = req.headers.get("content-type") || "";
+
+    if (contentType.includes("application/json")) {
+      const json = await req.json();
+      body = JSON.stringify(json);
+    } else {
+      body = await req.text();
+    }
   }
 
   try {
