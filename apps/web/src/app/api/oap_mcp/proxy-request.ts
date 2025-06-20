@@ -3,7 +3,7 @@ import { createServerClient } from "@supabase/ssr";
 
 // This will contain the object which contains the access token
 const MCP_TOKENS = process.env.MCP_TOKENS;
-const MCP_SERVER_URL = process.env.NEXT_PUBLIC_MCP_SERVER_URL;
+const MCP_SERVER_URL = process.env.MCP_SERVER_URL;
 const MCP_AUTH_REQUIRED = process.env.NEXT_PUBLIC_MCP_AUTH_REQUIRED === "true";
 
 async function getSupabaseToken(req: NextRequest) {
@@ -176,6 +176,10 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
   }
 
   try {
+    console.log('Target URL:', targetUrl);
+    console.log('Headers:', headers);
+    console.log('Body:', body);
+
     // Make the proxied request
     const response = await fetch(targetUrl, {
       method: req.method,
