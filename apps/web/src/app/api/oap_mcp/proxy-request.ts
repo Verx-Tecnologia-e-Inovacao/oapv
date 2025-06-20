@@ -242,7 +242,7 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
 
     return newResponse;
   } catch (error) {
-    console.error("MCP Proxy Error:", error);
+    /*console.error("MCP Proxy Error:", error);
     const errorMessage =
       error instanceof Error ? error.message : "Unknown error";
     return new Response(
@@ -251,6 +251,18 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
         status: 502, // Bad Gateway
         headers: { "Content-Type": "application/json" },
       },
+    );*/
+    console.error("MCP Proxy Error - Full Error Object:", error);
+
+    return new Response(
+      JSON.stringify({
+        message: "Proxy request failed",
+        error: error instanceof Error ? error.message : String(error),
+      }),
+      {
+        status: 502,
+        headers: { "Content-Type": "application/json" },
+      }
     );
   }
 }
