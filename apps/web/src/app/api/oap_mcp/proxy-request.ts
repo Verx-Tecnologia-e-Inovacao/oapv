@@ -93,7 +93,7 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
     return new Response(
       JSON.stringify({
         message:
-          "MCP_SERVER_URL environment variable is not set. Please set it to the URL of your MCP server, or NEXT_PUBLIC_MCP_SERVER_URL if you do not want to use the proxy route.",
+          "MCP_SERVER_URL environment variable is not set. Please set it to the URL of your MCP server.",
       }),
       { status: 500, headers: { "Content-Type": "application/json" } },
     );

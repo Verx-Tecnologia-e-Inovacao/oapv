@@ -9,7 +9,7 @@ import {
 async function main() {
   const deployments = getDeployments();
 
-  const newMCPUrlStr = process.env.NEXT_PUBLIC_MCP_SERVER_URL;
+  const newMCPUrlStr = process.env.MCP_SERVER_URL;
   if (!newMCPUrlStr) {
     throw new Error("MCP URL env variable is not set");
   }

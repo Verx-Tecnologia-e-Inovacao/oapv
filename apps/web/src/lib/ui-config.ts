@@ -100,7 +100,7 @@ export function configSchemaToConfigurableTools(
       continue;
     }
 
-    if (!process.env.NEXT_PUBLIC_MCP_SERVER_URL) {
+    if (!process.env.MCP_SERVER_URL) {
       toast.error("Can not configure MCP tool without MCP server URL", {
         richColors: true,
       });
@@ -111,7 +111,7 @@ export function configSchemaToConfigurableTools(
       label: key,
       type: uiConfig.type,
       default: {
-        url: process.env.NEXT_PUBLIC_MCP_SERVER_URL,
+        url: process.env.MCP_SERVER_URL,
         tools: [],
         ...(uiConfig.default ?? {}),
       },
