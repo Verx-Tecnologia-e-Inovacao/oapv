@@ -2,8 +2,6 @@ import { NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
 import https from "https";
 
-export const runtime = "nodejs";
-
 // This will contain the object which contains the access token
 const MCP_TOKENS = process.env.MCP_TOKENS;
 const MCP_SERVER_URL = process.env.MCP_SERVER_URL;

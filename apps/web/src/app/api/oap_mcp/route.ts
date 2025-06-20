@@ -1,7 +1,7 @@
 import { NextRequest } from "next/server";
 import { proxyRequest } from "./proxy-request";
 
-export const runtime = "edge";
+export const runtime = "nodejs";
 
 // Define handlers for all relevant HTTP methods
 export async function GET(req: NextRequest) {
