@@ -113,8 +113,12 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
   // and adding Authorization
   const headers = new Headers();
   req.headers.forEach((value, key) => {
-    // Some headers like 'host' should not be forwarded
-    if (key.toLowerCase() !== "host") {
+    const lowerKey = key.toLowerCase();
+
+    // avoid banned headers that cause errors in Undici (Node.js fetch)
+    const bannedHeaders = ["connection", "content-length", "transfer-encoding", "expect"];
+
+    if (!bannedHeaders.includes(lowerKey) && lowerKey !== "host") {
       headers.append(key, value);
     }
   });
