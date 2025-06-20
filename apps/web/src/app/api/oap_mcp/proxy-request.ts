@@ -1,6 +1,8 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
+import https from "https";
 
+export const runtime = "nodejs";
 
 // This will contain the object which contains the access token
 const MCP_TOKENS = process.env.MCP_TOKENS;
@@ -191,12 +193,15 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
     console.log('Target URL:', targetUrl);
     console.log('Headers:', headers);
     console.log('Body:', body);
+    
+    const httpsAgent = new https.Agent({ rejectUnauthorized: false });
 
     // Make the proxied request
     const response = await fetch(targetUrl, {
       method: req.method,
       headers,
       body,
+      agent: httpsAgent,
     });
     // Clone the response to create a new one we can modify
     const responseClone = response.clone();
