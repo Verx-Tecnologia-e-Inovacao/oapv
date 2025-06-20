@@ -1,6 +1,5 @@
 import { NextRequest, NextResponse } from "next/server";
 import { createServerClient } from "@supabase/ssr";
-import https from "https";
 
 
 // This will contain the object which contains the access token
@@ -189,8 +188,6 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
   }
 
   try {
-    const httpsAgent = new https.Agent({ rejectUnauthorized: false });
-
     console.log('Target URL:', targetUrl);
     console.log('Headers:', headers);
     console.log('Body:', body);
@@ -200,7 +197,6 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
       method: req.method,
       headers,
       body,
-      agent: httpsAgent,
     });
     // Clone the response to create a new one we can modify
     const responseClone = response.clone();
