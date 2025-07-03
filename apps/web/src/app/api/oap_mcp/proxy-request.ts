@@ -3,7 +3,8 @@ import { createServerClient } from "@supabase/ssr";
 
 // This will contain the object which contains the access token
 const MCP_TOKENS = process.env.MCP_TOKENS;
-const MCP_SERVER_URL = process.env.MCP_SERVER_URL;
+// Usar a URL do servidor MCP com a porta 2906 (porta fixa para o servidor MCP)
+const MCP_SERVER_URL = process.env.MCP_SERVER_URL || "http://localhost:2906";
 const MCP_AUTH_REQUIRED = process.env.NEXT_PUBLIC_MCP_AUTH_REQUIRED === "true";
 
 async function getSupabaseToken(req: NextRequest) {
@@ -42,30 +43,32 @@ async function getSupabaseToken(req: NextRequest) {
 }
 
 async function getMcpAccessToken(supabaseToken: string, mcpServerUrl: URL) {
-  const mcpUrl = `${mcpServerUrl.href}/mcp`;
-  const mcpOauthUrl = `${mcpServerUrl.href}/oauth/token`;
+  // Criar uma nova URL para garantir que estamos usando a porta 2906
+  const urlObj = new URL(mcpServerUrl.href);
+  urlObj.port = '2906';
+  
+  // Construir a URL completa para o endpoint token_exchange
+  // Usando o objeto URL para garantir que a URL seja construída corretamente
+  urlObj.pathname = '/token_exchange';
+  const mcpTokenExchangeUrl = urlObj.toString();
+  
+  console.log('MCP Server URL original:', mcpServerUrl.href);
+  console.log('Token Exchange URL completa:', mcpTokenExchangeUrl);
 
   try {
-    // Exchange Supabase token for MCP access token
-    const formData = new URLSearchParams();
-    formData.append("client_id", "mcp_default");
-    formData.append("subject_token", supabaseToken);
-    formData.append(
-      "grant_type",
-      "urn:ietf:params:oauth:grant-type:token-exchange",
-    );
-    formData.append("resource", mcpUrl);
-    formData.append(
-      "subject_token_type",
-      "urn:ietf:params:oauth:token-type:access_token",
-    );
-
-    const tokenResponse = await fetch(mcpOauthUrl, {
+    // Exchange Supabase token for MCP JWT token
+    const tokenResponse = await fetch(mcpTokenExchangeUrl, {
       method: "POST",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
       },
-      body: formData.toString(),
+      body: JSON.stringify({
+        subject_token: supabaseToken,
+        client_id: "next_app",
+        grant_type: "urn:ietf:params:oauth:grant-type:token-exchange",
+        resource: "mcp",
+        subject_token_type: "urn:ietf:params:oauth:token-type:access_token"
+      }),
     });
 
     if (tokenResponse.ok) {
@@ -73,9 +76,11 @@ async function getMcpAccessToken(supabaseToken: string, mcpServerUrl: URL) {
       return tokenData.access_token;
     } else {
       console.error("Token exchange failed:", await tokenResponse.text());
+      return null;
     }
   } catch (e) {
     console.error("Error during token exchange:", e);
+    return null;
   }
 }
 
@@ -106,8 +111,24 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
 
   // Construct the target URL
   const targetUrlObj = new URL(MCP_SERVER_URL);
-  targetUrlObj.pathname = `${targetUrlObj.pathname}${targetUrlObj.pathname.endsWith("/") ? "" : "/"}mcp${path}${url.search}`;
+  
+  // Garantir que estamos usando a porta 2906
+  targetUrlObj.port = '2906';
+  
+  // Construir o caminho corretamente para evitar barras duplas
+  // Primeiro limpar o pathname para garantir que não temos barras extras
+  let basePath = targetUrlObj.pathname === '/' ? '' : targetUrlObj.pathname;
+  basePath = basePath.endsWith('/') ? basePath.slice(0, -1) : basePath;
+  
+  // Construir o caminho completo
+  targetUrlObj.pathname = `${basePath}/mcp${path}`;
+  
+  // Adicionar os parâmetros de consulta, se houver
+  targetUrlObj.search = url.search;
+  
   const targetUrl = targetUrlObj.toString();
+  
+  console.log('URL alvo para requisição MCP:', targetUrl);
 
   // Prepare headers, forwarding original headers except Host
   // and adding Authorization
@@ -229,20 +250,21 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
     });
 
     if (MCP_AUTH_REQUIRED) {
-      // If we used the Supabase token exchange, add the access token to the response
-      // so it can be used in future requests
-      if (!mcpAccessTokenCookie && !MCP_TOKENS && accessToken) {
-        // Set a cookie with the access token that will be included in future requests
-        newResponse.cookies.set({
-          name: "X-MCP-Access-Token",
-          value: accessToken,
-          httpOnly: false, // Allow JavaScript access so it can be read for headers
-          secure: process.env.NODE_ENV === "production",
-          sameSite: "lax",
-          maxAge: 3600, // 1 hour expiration
-        });
-      }
+    // If we used the Supabase token exchange, add the access token to the response
+    // so it can be used in future requests
+    if (!mcpAccessTokenCookie && !MCP_TOKENS && accessToken) {
+      // Set a cookie with the access token that will be included in future requests
+      newResponse.cookies.set({
+        name: "X-MCP-Access-Token",
+        value: accessToken,
+        httpOnly: true, // Prevent JavaScript access for security
+        secure: process.env.NODE_ENV === "production",
+        sameSite: "strict",
+        maxAge: 1800, // 30 minutes expiration (matching JWT expiration)
+        path: "/", // Available on all paths
+      });
     }
+  }
 
     return newResponse;
   } catch (error) {
