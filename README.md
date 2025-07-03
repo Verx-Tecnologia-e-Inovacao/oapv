@@ -6,9 +6,6 @@ Cada agente pode ser personalizado para ter conhecimentos específicos, "aliment
 
 Além disso, a plataforma inclui uma *Caixa de Entrada* de supervisão, que garante que ações importantes dos agentes possam ser revisadas e aprovadas por um humano antes de serem executadas, criando um fluxo de trabalho seguro e confiável.
 
-
-**Source Repository:** [None](None)
-
 ```mermaid
 flowchart TD
     A0["Gerenciamento de Agentes e Configuração
