@@ -42,30 +42,23 @@ async function getSupabaseToken(req: NextRequest) {
 }
 
 async function getMcpAccessToken(supabaseToken: string, mcpServerUrl: URL) {
-  const mcpUrl = `${mcpServerUrl.href}/mcp`;
-  const mcpOauthUrl = `${mcpServerUrl.href}/oauth/token`;
+  const mcpUrl = `${mcpServerUrl.href}mcp`;
+  const mcpOauthUrl = `${mcpServerUrl.href}oauth/token`;
 
   try {
-    // Exchange Supabase token for MCP access token
-    const formData = new URLSearchParams();
-    formData.append("client_id", "mcp_default");
-    formData.append("subject_token", supabaseToken);
-    formData.append(
-      "grant_type",
-      "urn:ietf:params:oauth:grant-type:token-exchange",
-    );
-    formData.append("resource", mcpUrl);
-    formData.append(
-      "subject_token_type",
-      "urn:ietf:params:oauth:token-type:access_token",
-    );
-
+    // Exchange Supabase token for MCP JWT token
     const tokenResponse = await fetch(mcpOauthUrl, {
       method: "POST",
       headers: {
-        "Content-Type": "application/x-www-form-urlencoded",
+        "Content-Type": "application/json",
       },
-      body: formData.toString(),
+      body: JSON.stringify({
+        subject_token: supabaseToken,
+        client_id: "next_app",
+        grant_type: "urn:ietf:params:oauth:grant-type:token-exchange",
+        resource: mcpUrl,
+        subject_token_type: "urn:ietf:params:oauth:token-type:access_token"
+      }),
     });
 
     if (tokenResponse.ok) {
@@ -73,6 +66,7 @@ async function getMcpAccessToken(supabaseToken: string, mcpServerUrl: URL) {
       return tokenData.access_token;
     } else {
       console.error("Token exchange failed:", await tokenResponse.text());
+      return null;
     }
   } catch (e) {
     console.error("Error during token exchange:", e);
@@ -147,6 +141,9 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
         console.error("Failed to parse MCP_TOKENS env variable", e);
       }
     }
+
+    console.log("MCP SERVER URL:", MCP_SERVER_URL);
+    console.log("MCP SERVER URL (parsed):", new URL(MCP_SERVER_URL));
 
     // If no token yet, try Supabase-JWT token exchange
     if (!accessToken && supabaseToken && MCP_SERVER_URL) {
