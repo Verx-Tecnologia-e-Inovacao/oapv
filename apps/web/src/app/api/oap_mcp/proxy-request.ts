@@ -42,30 +42,50 @@ async function getSupabaseToken(req: NextRequest) {
 }
 
 async function getMcpAccessToken(supabaseToken: string, mcpServerUrl: URL) {
-  const mcpUrl = `${mcpServerUrl.href}mcp`;
-  const mcpOauthUrl = `${mcpServerUrl.href}oauth/token`;
+  // Garantir que a URL base termina com uma barra
+  const baseUrl = mcpServerUrl.href.endsWith('/') ? mcpServerUrl.href : `${mcpServerUrl.href}/`;
+  const mcpUrl = `${baseUrl}mcp`;
+  const mcpOauthUrl = `${baseUrl}oauth/token`;
+  
+  console.log(`Tentando trocar token em: ${mcpOauthUrl}`);
 
+  // Preparar o payload para a requisição
+  const payload = {
+    subject_token: supabaseToken,
+    client_id: "next_app",
+    grant_type: "urn:ietf:params:oauth:grant-type:token-exchange",
+    resource: mcpUrl,
+    subject_token_type: "urn:ietf:params:oauth:token-type:access_token"
+  };
+  
+  console.log(`Enviando payload para troca de token:`, JSON.stringify(payload));
+  
   try {
+    // Converter o payload para formato x-www-form-urlencoded
+    const formBody = Object.entries(payload)
+      .map(([key, value]) => encodeURIComponent(key) + '=' + encodeURIComponent(value))
+      .join('&');
+    
+    console.log(`Enviando form-urlencoded: ${formBody}`);
+    
     // Exchange Supabase token for MCP JWT token
     const tokenResponse = await fetch(mcpOauthUrl, {
       method: "POST",
       headers: {
-        "Content-Type": "application/json",
+        "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: JSON.stringify({
-        subject_token: supabaseToken,
-        client_id: "next_app",
-        grant_type: "urn:ietf:params:oauth:grant-type:token-exchange",
-        resource: mcpUrl,
-        subject_token_type: "urn:ietf:params:oauth:token-type:access_token"
-      }),
+      body: formBody,
     });
 
+    console.log(`Resposta da troca de token - Status: ${tokenResponse.status} ${tokenResponse.statusText}`);
+    
     if (tokenResponse.ok) {
       const tokenData = await tokenResponse.json();
+      console.log(`Token trocado com sucesso, primeiros caracteres: ${tokenData.access_token?.substring(0, 15)}...`);
       return tokenData.access_token;
     } else {
-      console.error("Token exchange failed:", await tokenResponse.text());
+      const errorText = await tokenResponse.text();
+      console.error(`Token exchange failed (${tokenResponse.status}):`, errorText);
       return null;
     }
   } catch (e) {
