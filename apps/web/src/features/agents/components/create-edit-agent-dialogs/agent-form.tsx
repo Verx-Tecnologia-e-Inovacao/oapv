@@ -78,7 +78,9 @@ export function AgentFieldsForm({
   return (
     <div className="flex flex-col gap-8 py-4">
       <div className="flex w-full flex-col items-start justify-start gap-2 space-y-2">
-        <p className="text-lg font-semibold tracking-tight">Detalhes do Agente</p>
+        <p className="text-lg font-semibold tracking-tight">
+          Detalhes do Agente
+        </p>
         <div className="flex w-full flex-col items-start justify-start gap-2">
           <Label htmlFor="oap_name">
             Nome <span className="text-red-500">*</span>
@@ -205,7 +207,9 @@ export function AgentFieldsForm({
                         }}
                         disabled={loadingMore || loading}
                       >
-                        {loadingMore ? "Carregando..." : "Carregar Mais Ferramentas"}
+                        {loadingMore
+                          ? "Carregando..."
+                          : "Carregar Mais Ferramentas"}
                       </Button>
                     </div>
                   )}
@@ -218,7 +222,9 @@ export function AgentFieldsForm({
           <>
             <Separator />
             <div className="flex w-full flex-col items-start justify-start gap-2">
-              <p className="text-lg font-semibold tracking-tight">RAG do Agente</p>
+              <p className="text-lg font-semibold tracking-tight">
+                RAG do Agente
+              </p>
               <Controller
                 control={form.control}
                 name={`config.${ragConfigurations[0].label}`}

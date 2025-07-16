@@ -54,7 +54,9 @@ const StreamSession = ({
   useProxyRoute?: boolean;
 }) => {
   if (!useProxyRoute && !accessToken) {
-    toast.error("Token de acesso deve ser fornecido se não estiver usando rota de proxy");
+    toast.error(
+      "Token de acesso deve ser fornecido se não estiver usando rota de proxy",
+    );
   }
 
   const deployment = getDeployments().find((d) => d.id === deploymentId);
@@ -148,14 +150,18 @@ export const StreamProvider: React.FC<{ children: ReactNode }> = ({
         <div className="animate-in fade-in-0 zoom-in-95 bg-background flex min-h-64 max-w-3xl flex-col rounded-lg border shadow-lg">
           <div className="mt-14 flex flex-col gap-2 p-6">
             <div className="flex flex-col items-start gap-2">
-              <ViaLogoSVG width={36} height={36} />
+              <ViaLogoSVG
+                width={36}
+                height={36}
+              />
 
               <h1 className="text-xl font-semibold tracking-tight">
                 VIA - Plataforma de Agentes
               </h1>
             </div>
             <p className="text-muted-foreground">
-              Bem-vindo ao chat da Plataforma de Agentes da VIA! Para continuar, selecione o agente com quem deseja conversar.
+              Bem-vindo ao chat da Plataforma de Agentes da VIA! Para continuar,
+              selecione o agente com quem deseja conversar.
             </p>
           </div>
           <div className="mb-24 grid grid-cols-[1fr_auto] gap-4 px-6 pt-4">
@@ -172,7 +178,12 @@ export const StreamProvider: React.FC<{ children: ReactNode }> = ({
               open={open}
               setOpen={setOpen}
             />
-            <Button variant="brand" onClick={handleStartChat}>Iniciar Chat</Button>
+            <Button
+              variant="brand"
+              onClick={handleStartChat}
+            >
+              Iniciar Chat
+            </Button>
           </div>
         </div>
       </div>
@@ -181,7 +192,9 @@ export const StreamProvider: React.FC<{ children: ReactNode }> = ({
 
   const useProxyRoute = process.env.NEXT_PUBLIC_USE_LANGSMITH_AUTH === "true";
   if (!useProxyRoute && !session?.accessToken) {
-    toast.error("Token de acesso deve ser fornecido se não estiver usando rota de proxy");
+    toast.error(
+      "Token de acesso deve ser fornecido se não estiver usando rota de proxy",
+    );
     return null;
   }
 
@@ -201,7 +214,9 @@ export const StreamProvider: React.FC<{ children: ReactNode }> = ({
 export const useStreamContext = (): StreamContextType => {
   const context = useContext(StreamContext);
   if (context === undefined) {
-    throw new Error("useStreamContext deve ser usado dentro de um StreamProvider");
+    throw new Error(
+      "useStreamContext deve ser usado dentro de um StreamProvider",
+    );
   }
   return context;
 };

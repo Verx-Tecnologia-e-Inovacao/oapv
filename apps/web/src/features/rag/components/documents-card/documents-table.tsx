@@ -104,12 +104,10 @@ export function DocumentsTable({
                   </DropdownMenu>
                   <AlertDialogContent>
                     <AlertDialogHeader>
-                      <AlertDialogTitle>
-                        Tem certeza absoluta?
-                      </AlertDialogTitle>
+                      <AlertDialogTitle>Tem certeza absoluta?</AlertDialogTitle>
                       <AlertDialogDescription>
-                        Esta ação não pode ser desfeita. Isso excluirá permanentemente
-                        o documento
+                        Esta ação não pode ser desfeita. Isso excluirá
+                        permanentemente o documento
                         <span className="font-semibold">
                           {" "}
                           {doc.metadata.name}

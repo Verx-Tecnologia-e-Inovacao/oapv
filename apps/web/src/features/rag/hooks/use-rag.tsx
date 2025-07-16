@@ -208,7 +208,8 @@ export function useRag(): UseRagReturn {
       if (!session?.accessToken && !accessToken) {
         toast.error("Sessão não encontrada", {
           richColors: true,
-          description: "Falha ao listar documentos. Por favor, tente novamente.",
+          description:
+            "Falha ao listar documentos. Por favor, tente novamente.",
         });
         return [];
       }
@@ -243,7 +244,8 @@ export function useRag(): UseRagReturn {
       if (!session?.accessToken && !accessToken) {
         toast.error("Sessão não encontrada", {
           richColors: true,
-          description: "Falha ao listar documentos. Por favor, tente novamente.",
+          description:
+            "Falha ao listar documentos. Por favor, tente novamente.",
         });
         return [];
       }
@@ -276,7 +278,8 @@ export function useRag(): UseRagReturn {
       if (!session?.accessToken) {
         toast.error("Sessão não encontrada", {
           richColors: true,
-          description: "Falha ao excluir documento. Por favor, tente novamente.",
+          description:
+            "Falha ao excluir documento. Por favor, tente novamente.",
         });
         return;
       }
@@ -310,7 +313,8 @@ export function useRag(): UseRagReturn {
       if (!session?.accessToken) {
         toast.error("Sessão não encontrada", {
           richColors: true,
-          description: "Falha ao fazer upload do(s) arquivo(s). Por favor, tente novamente.",
+          description:
+            "Falha ao fazer upload do(s) arquivo(s). Por favor, tente novamente.",
         });
         return;
       }
@@ -349,7 +353,8 @@ export function useRag(): UseRagReturn {
       if (!session?.accessToken) {
         toast.error("Sessão não encontrada", {
           richColors: true,
-          description: "Falha ao fazer upload do texto. Por favor, tente novamente.",
+          description:
+            "Falha ao fazer upload do texto. Por favor, tente novamente.",
         });
         return;
       }
@@ -473,7 +478,8 @@ export function useRag(): UseRagReturn {
       if (!session?.accessToken) {
         toast.error("Sessão não encontrada", {
           richColors: true,
-          description: "Falha ao atualizar coleção. Por favor, tente novamente.",
+          description:
+            "Falha ao atualizar coleção. Por favor, tente novamente.",
         });
         return;
       }
@@ -492,7 +498,9 @@ export function useRag(): UseRagReturn {
 
       const trimmedNewName = newName.trim();
       if (!trimmedNewName) {
-        toast.error("Nome da coleção não pode estar vazio.", { richColors: true });
+        toast.error("Nome da coleção não pode estar vazio.", {
+          richColors: true,
+        });
         return undefined;
       }
 
@@ -503,10 +511,9 @@ export function useRag(): UseRagReturn {
           c.name !== collectionToUpdate.name,
       );
       if (nameExists) {
-        toast.warning(
-          `Já existe uma coleção com o nome "${trimmedNewName}"`,
-          { richColors: true },
-        );
+        toast.warning(`Já existe uma coleção com o nome "${trimmedNewName}"`, {
+          richColors: true,
+        });
         return undefined;
       }
 

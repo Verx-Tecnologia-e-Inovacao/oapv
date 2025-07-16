@@ -138,12 +138,17 @@ export function AgentDashboard() {
           <div className="bg-muted mx-auto flex h-20 w-20 items-center justify-center rounded-full">
             <Search className="text-muted-foreground h-10 w-10" />
           </div>
-          <h2 className="mt-6 text-xl font-semibold">Nenhum agente encontrado</h2>
+          <h2 className="mt-6 text-xl font-semibold">
+            Nenhum agente encontrado
+          </h2>
           <p className="text-muted-foreground mt-2 mb-8 text-center">
-            Não encontramos nenhum agente que corresponda aos seus critérios de busca. Tente
-            ajustar seus filtros ou criar um novo agente.
+            Não encontramos nenhum agente que corresponda aos seus critérios de
+            busca. Tente ajustar seus filtros ou criar um novo agente.
           </p>
-          <Button variant="brand" onClick={() => setShowCreateDialog(true)}>
+          <Button
+            variant="brand"
+            onClick={() => setShowCreateDialog(true)}
+          >
             Criar Agente
           </Button>
         </div>

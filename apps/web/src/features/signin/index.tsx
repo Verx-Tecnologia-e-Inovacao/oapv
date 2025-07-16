@@ -186,11 +186,7 @@ export default function SigninInterface() {
               variant="brand"
               disabled={isLoading || isSuccess}
             >
-              {isLoading
-                ? "Entrando..."
-                : isSuccess
-                  ? "Sucesso!"
-                  : "Entrar"}
+              {isLoading ? "Entrando..." : isSuccess ? "Sucesso!" : "Entrar"}
             </Button>
           </form>
 

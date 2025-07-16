@@ -4,6 +4,6 @@ const nextConfig = {
     // Permite que o build complete mesmo com erros de ESLint
     ignoreDuringBuilds: true,
   },
-}
+};
 
-export default nextConfig
+export default nextConfig;

@@ -153,7 +153,9 @@ function EditAgentDialogContent({
               <Bot />
             )}
             <span>
-              {form.formState.isSubmitting ? "Salvando..." : "Salvar Alterações"}
+              {form.formState.isSubmitting
+                ? "Salvando..."
+                : "Salvar Alterações"}
             </span>
           </Button>
         </AlertDialogFooter>
