@@ -1,0 +1,60 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "language": "en,pt-BR",
+  "import": [
+    "@cspell/dict-pt-br/cspell-ext.json"
+  ],
+  "dictionaries": [
+    "en_us",
+    "pt-br",
+    "softwareTerms"
+  ],
+  "dictionaryDefinitions": [],
+  "ignorePaths": [
+    "node_modules",
+    "package-lock.json",
+    "yarn.lock",
+    "*.log",
+    ".git",
+    "dist",
+    "build",
+    "README.md"
+  ],
+  "words": [
+    "langgraph",
+    "supabase",
+    "langchain",
+    "langsmith",
+    "LANGSMITH",
+    "nuqs",
+    "modelcontextprotocol",
+    "Streamable",
+    "streamable",
+    "cmdk",
+    "katex",
+    "Katex",
+    "ietf",
+    "Plataforme",
+    "stringifying",
+    "doesnt",
+    "hitl",
+    "kwargs",
+    "coldark",
+    "nums",
+    "uuidv",
+    "Reseto",
+    "colecao",
+    "padrao",
+    "metadatas",
+    "esnext"
+  ],
+  "enableFiletypes": [
+    "javascript",
+    "typescript",
+    "jsx",
+    "tsx",
+    "json"
+  ],
+  "useGitignore": true
+}

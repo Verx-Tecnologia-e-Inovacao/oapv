@@ -11,9 +11,15 @@
     "turbo:command": "turbo",
     "format": "turbo format",
     "lint": "turbo lint",
-    "lint:fix": "turbo lint:fix"
+    "lint:fix": "turbo lint:fix",
+    "spellcheck": "yarn spellcheck:readme && yarn spellcheck:code",
+    "spellcheck:readme": "cspell --config=cspell-readme.json README.md",
+    "spellcheck:code": "cspell --config=cspell.json \"apps/**/*.{js,jsx,ts,tsx,json}\"",
+    "spellcheck:fix": "cspell --no-progress --config=cspell-readme.json README.md"
   },
   "devDependencies": {
+    "@cspell/dict-pt-br": "^2.4.1",
+    "cspell": "^9.1.5",
     "turbo": "^2.5.0",
     "typescript": "^5"
   },
