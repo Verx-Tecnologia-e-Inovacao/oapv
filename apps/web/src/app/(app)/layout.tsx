@@ -7,7 +7,7 @@ import { SidebarLayout } from "@/components/sidebar";
 import { AuthProvider } from "@/providers/Auth";
 import { DOCS_LINK } from "@/constants";
 
-const inter = Inter({
+const _inter = Inter({
   subsets: ["latin"],
   preload: true,
   display: "swap",
