@@ -43,11 +43,13 @@ async function getSupabaseToken(req: NextRequest) {
 
 async function getMcpAccessToken(supabaseToken: string, mcpServerUrl: URL) {
   // Garantir que a URL base termina com uma barra
-  const baseUrl = mcpServerUrl.href.endsWith('/') ? mcpServerUrl.href : `${mcpServerUrl.href}/`;
+  const baseUrl = mcpServerUrl.href.endsWith("/")
+    ? mcpServerUrl.href
+    : `${mcpServerUrl.href}/`;
   const mcpUrl = `${baseUrl}mcp`;
   const mcpOauthUrl = `${baseUrl}oauth/token`;
-  
-  console.log(`Tentando trocar token em: ${mcpOauthUrl}`);
+
+  // Log removido para produção
 
   // Preparar o payload para a requisição
   const payload = {
@@ -55,19 +57,22 @@ async function getMcpAccessToken(supabaseToken: string, mcpServerUrl: URL) {
     client_id: "next_app",
     grant_type: "urn:ietf:params:oauth:grant-type:token-exchange",
     resource: mcpUrl,
-    subject_token_type: "urn:ietf:params:oauth:token-type:access_token"
+    subject_token_type: "urn:ietf:params:oauth:token-type:access_token",
   };
-  
-  console.log(`Enviando payload para troca de token:`, JSON.stringify(payload));
-  
+
+  // Log removido para produção
+
   try {
     // Converter o payload para formato x-www-form-urlencoded
     const formBody = Object.entries(payload)
-      .map(([key, value]) => encodeURIComponent(key) + '=' + encodeURIComponent(value))
-      .join('&');
-    
-    console.log(`Enviando form-urlencoded: ${formBody}`);
-    
+      .map(
+        ([key, value]) =>
+          encodeURIComponent(key) + "=" + encodeURIComponent(value),
+      )
+      .join("&");
+
+    // Log removido para produção
+
     // Exchange Supabase token for MCP JWT token
     const tokenResponse = await fetch(mcpOauthUrl, {
       method: "POST",
@@ -77,15 +82,18 @@ async function getMcpAccessToken(supabaseToken: string, mcpServerUrl: URL) {
       body: formBody,
     });
 
-    console.log(`Resposta da troca de token - Status: ${tokenResponse.status} ${tokenResponse.statusText}`);
-    
+    // Log removido para produção
+
     if (tokenResponse.ok) {
       const tokenData = await tokenResponse.json();
-      console.log(`Token trocado com sucesso, primeiros caracteres: ${tokenData.access_token?.substring(0, 15)}...`);
+      // Log removido para produção
       return tokenData.access_token;
     } else {
       const errorText = await tokenResponse.text();
-      console.error(`Token exchange failed (${tokenResponse.status}):`, errorText);
+      console.error(
+        `Token exchange failed (${tokenResponse.status}):`,
+        errorText,
+      );
       return null;
     }
   } catch (e) {
@@ -130,7 +138,12 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
     const lowerKey = key.toLowerCase();
 
     // avoid banned headers that cause errors in Undici (Node.js fetch)
-    const bannedHeaders = ["connection", "content-length", "transfer-encoding", "expect"];
+    const bannedHeaders = [
+      "connection",
+      "content-length",
+      "transfer-encoding",
+      "expect",
+    ];
 
     if (!bannedHeaders.includes(lowerKey) && lowerKey !== "host") {
       headers.append(key, value);
@@ -162,8 +175,7 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
       }
     }
 
-    console.log("MCP SERVER URL:", MCP_SERVER_URL);
-    console.log("MCP SERVER URL (parsed):", new URL(MCP_SERVER_URL));
+    // Logs de debug removidos para produção
 
     // If no token yet, try Supabase-JWT token exchange
     if (!accessToken && supabaseToken && MCP_SERVER_URL) {
@@ -208,9 +220,7 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
   }
 
   try {
-    console.log('Target URL:', targetUrl);
-    console.log('Headers:', headers);
-    console.log('Body:', body);
+    // Logs de debug removidos para produção
 
     // Make the proxied request
     const response = await fetch(targetUrl, {
@@ -283,7 +293,7 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
       {
         status: 502,
         headers: { "Content-Type": "application/json" },
-      }
+      },
     );
   }
 }

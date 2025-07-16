@@ -88,7 +88,9 @@ export function TemplatesList() {
           <div className="bg-muted mx-auto flex h-20 w-20 items-center justify-center rounded-full">
             <Search className="text-muted-foreground h-10 w-10" />
           </div>
-          <h2 className="mt-6 text-xl font-semibold">Nenhum grafo encontrado</h2>
+          <h2 className="mt-6 text-xl font-semibold">
+            Nenhum grafo encontrado
+          </h2>
           <p className="text-muted-foreground mt-2 mb-8 text-center">
             {searchQueryState
               ? "Não encontramos nenhum grafo que corresponda à sua busca."

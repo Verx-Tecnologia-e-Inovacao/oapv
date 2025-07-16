@@ -108,8 +108,8 @@ export function CreateCollectionDialog({
               <Alert variant="destructive">
                 <AlertCircle className="h-4 w-4" />
                 <AlertDescription>
-                  A descrição excede o limite máximo de{" "}
-                  {DESCRIPTION_MAX_LENGTH} caracteres.
+                  A descrição excede o limite máximo de {DESCRIPTION_MAX_LENGTH}{" "}
+                  caracteres.
                 </AlertDescription>
               </Alert>
             </div>

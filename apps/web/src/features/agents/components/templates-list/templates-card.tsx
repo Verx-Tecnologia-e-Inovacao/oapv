@@ -79,8 +79,9 @@ export function TemplateCard({
                       <Badge variant="outline">{deployment.name}</Badge>
                     </TooltipTrigger>
                     <TooltipContent className="max-w-[350px]">
-                      O deployment ao qual o grafo pertence. Deployments geralmente
-                      contêm uma coleção de grafos similares ou relacionados.
+                      O deployment ao qual o grafo pertence. Deployments
+                      geralmente contêm uma coleção de grafos similares ou
+                      relacionados.
                     </TooltipContent>
                   </Tooltip>
                 </TooltipProvider>

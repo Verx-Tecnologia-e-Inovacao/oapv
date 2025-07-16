@@ -190,7 +190,9 @@ function NewThreadButton(props: { hasMessages: boolean }) {
           size="lg"
           className="relative size-9 p-4 shadow-none focus-within:z-10"
           tooltip={
-            isMac ? "Nova conversa (Cmd+Shift+O)" : "Nova conversa (Ctrl+Shift+O)"
+            isMac
+              ? "Nova conversa (Cmd+Shift+O)"
+              : "Nova conversa (Ctrl+Shift+O)"
           }
           onClick={handleNewThread}
           style={{ borderTopLeftRadius: 0, borderBottomLeftRadius: 0 }}

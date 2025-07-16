@@ -39,7 +39,8 @@ export function NavUser() {
   // Use auth user if available, otherwise use default user
   const displayUser = authUser
     ? {
-        name: authUser.displayName || authUser.email?.split("@")[0] || "Usuário",
+        name:
+          authUser.displayName || authUser.email?.split("@")[0] || "Usuário",
         email: authUser.email || "",
         avatar: authUser.avatarUrl || "",
         company: authUser.companyName || "",

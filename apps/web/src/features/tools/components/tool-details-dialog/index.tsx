@@ -40,7 +40,12 @@ export function ToolDetailsDialog({ tool, children }: ToolDetailsDialogProps) {
         </div>
         <DialogFooter>
           <DialogClose asChild>
-            <Button type="submit" variant="brand">Close</Button>
+            <Button
+              type="submit"
+              variant="brand"
+            >
+              Close
+            </Button>
           </DialogClose>
         </DialogFooter>
       </DialogContent>

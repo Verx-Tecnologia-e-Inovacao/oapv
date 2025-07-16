@@ -29,7 +29,9 @@ export function AuthDebug() {
   return (
     <Card className="mt-6 max-w-lg">
       <CardHeader>
-        <CardTitle className="text-lg">Panel de Debug de Autenticação</CardTitle>
+        <CardTitle className="text-lg">
+          Panel de Debug de Autenticação
+        </CardTitle>
         <CardDescription>
           Este painel mostra o estado atual da autenticação
         </CardDescription>
