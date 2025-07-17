@@ -16,9 +16,12 @@ jobs:
       - name: Setup SSH
         run: |
           mkdir -p ~/.ssh
-          echo "${{ secrets.EC2_SSH_KEY }}" > ~/.ssh/id_ed25519
+          echo "${{ secrets.EC2_SSH_KEY }}" | tr -d '\r' > ~/.ssh/id_ed25519
           chmod 600 ~/.ssh/id_ed25519
           ssh-keyscan -H ${{ secrets.EC2_HOST }} >> ~/.ssh/known_hosts
+          # Verificar se a chave foi salva corretamente (apenas para debug)
+          ls -la ~/.ssh/
+          head -n 1 ~/.ssh/id_ed25519
 
       - name: Deploy to EC2
         run: |
