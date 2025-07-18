@@ -18,7 +18,13 @@ yarn install
 echo "Buildando aplicação..."
 yarn build:internal
 
-echo "Reiniciando processo PM2 ($PROCESS_NAME)..."
-pm2 restart "$PROCESS_NAME"
+echo "Verificando processo PM2 ($PROCESS_NAME)..."
+if pm2 list | grep -q "$PROCESS_NAME"; then
+  echo "Reiniciando processo PM2 ($PROCESS_NAME)..."
+  pm2 restart "$PROCESS_NAME"
+else
+  echo "Criando novo processo PM2 ($PROCESS_NAME)..."
+  pm2 start npm --name "$PROCESS_NAME" -- start
+fi
 
 echo "Deploy concluído!"
