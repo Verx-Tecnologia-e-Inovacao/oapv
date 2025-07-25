@@ -24,7 +24,7 @@ rm -rf .turbo .next
 
 # 4. Instala dependências
 echo "📦 Instalando dependências..."
-yarn install --production
+yarn install --immutable
 
 # 5. Executa build limpa
 echo "⚙️  Executando build limpa com Turbo..."
