@@ -177,7 +177,9 @@ export const ConfigurationSidebar = forwardRef<
       (a) => a.assistant_id === agentId && a.deploymentId === deploymentId,
     );
     if (!selectedAgent) {
-      toast.error("Falha ao obter configuração do agente.", { richColors: true });
+      toast.error("Falha ao obter configuração do agente.", {
+        richColors: true,
+      });
       return;
     }
 
@@ -298,8 +300,9 @@ export const ConfigurationSidebar = forwardRef<
                   </Button>
                 </AlertTitle>
                 <AlertDescription>
-                  As alterações feitas na configuração serão salvas automaticamente,
-                  mas só serão mantidas entre sessões se você clicar em "Salvar".
+                  As alterações feitas na configuração serão salvas
+                  automaticamente, mas só serão mantidas entre sessões se você
+                  clicar em "Salvar".
                 </AlertDescription>
               </Alert>
             </div>
@@ -317,7 +320,9 @@ export const ConfigurationSidebar = forwardRef<
                 <TabsTrigger value="rag">RAG</TabsTrigger>
               )}
               {supportedConfigs.includes("supervisor") && (
-                <TabsTrigger value="supervisor">Agentes Supervisores</TabsTrigger>
+                <TabsTrigger value="supervisor">
+                  Agentes Supervisores
+                </TabsTrigger>
               )}
             </TabsList>
 
@@ -382,7 +387,8 @@ export const ConfigurationSidebar = forwardRef<
                         displayTools.length === 0 &&
                         toolSearchTerm && (
                           <p className="mt-4 text-center text-sm text-slate-500">
-                            Nenhuma ferramenta encontrada com "{toolSearchTerm}".
+                            Nenhuma ferramenta encontrada com "{toolSearchTerm}
+                            ".
                           </p>
                         )}
                       {!agentId && (

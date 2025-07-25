@@ -71,8 +71,8 @@ export default function ForgotPasswordInterface() {
             <Alert className="mb-4">
               <AlertDescription>
                 Se o seu endereço de email estiver associado a uma conta, você
-                receberá um email com instruções para redefinir sua senha
-                em breve.
+                receberá um email com instruções para redefinir sua senha em
+                breve.
               </AlertDescription>
             </Alert>
           ) : (

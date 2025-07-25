@@ -167,7 +167,9 @@ export function DocumentsCard({
     }
 
     setIsUploading(true);
-    const loadingToast = toast.loading("Fazendo upload dos arquivos", { richColors: true });
+    const loadingToast = toast.loading("Fazendo upload dos arquivos", {
+      richColors: true,
+    });
     // Convert File[] to FileList as expected by the hook
     const dataTransfer = new DataTransfer();
     stagedFiles.forEach((file) => dataTransfer.items.add(file));
@@ -189,9 +191,12 @@ export function DocumentsCard({
 
     if (textInput.trim()) {
       setIsUploading(true);
-      const loadingToast = toast.loading("Fazendo upload do documento de texto", {
-        richColors: true,
-      });
+      const loadingToast = toast.loading(
+        "Fazendo upload do documento de texto",
+        {
+          richColors: true,
+        },
+      );
       await handleDocumentTextUpload(textInput, selectedCollection.uuid);
       setTextInput("");
       setIsUploading(false);
@@ -206,7 +211,8 @@ export function DocumentsCard({
     if (!selectedCollection) {
       toast.error("Nenhuma coleção selecionada", {
         richColors: true,
-        description: "Por favor, selecione uma coleção para conversar com os documentos.",
+        description:
+          "Por favor, selecione uma coleção para conversar com os documentos.",
       });
       return;
     }

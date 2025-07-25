@@ -42,37 +42,59 @@ async function getSupabaseToken(req: NextRequest) {
 }
 
 async function getMcpAccessToken(supabaseToken: string, mcpServerUrl: URL) {
-  const mcpUrl = `${mcpServerUrl.href}/mcp`;
-  const mcpOauthUrl = `${mcpServerUrl.href}/oauth/token`;
+  // Garantir que a URL base termina com uma barra
+  const baseUrl = mcpServerUrl.href.endsWith("/")
+    ? mcpServerUrl.href
+    : `${mcpServerUrl.href}/`;
+  const mcpUrl = `${baseUrl}mcp`;
+  const mcpOauthUrl = `${baseUrl}oauth/token`;
+
+  // Log removido para produção
+
+  // Preparar o payload para a requisição
+  const payload = {
+    subject_token: supabaseToken,
+    client_id: "next_app",
+    grant_type: "urn:ietf:params:oauth:grant-type:token-exchange",
+    resource: mcpUrl,
+    subject_token_type: "urn:ietf:params:oauth:token-type:access_token",
+  };
+
+  // Log removido para produção
 
   try {
-    // Exchange Supabase token for MCP access token
-    const formData = new URLSearchParams();
-    formData.append("client_id", "mcp_default");
-    formData.append("subject_token", supabaseToken);
-    formData.append(
-      "grant_type",
-      "urn:ietf:params:oauth:grant-type:token-exchange",
-    );
-    formData.append("resource", mcpUrl);
-    formData.append(
-      "subject_token_type",
-      "urn:ietf:params:oauth:token-type:access_token",
-    );
+    // Converter o payload para formato x-www-form-urlencoded
+    const formBody = Object.entries(payload)
+      .map(
+        ([key, value]) =>
+          encodeURIComponent(key) + "=" + encodeURIComponent(value),
+      )
+      .join("&");
 
+    // Log removido para produção
+
+    // Exchange Supabase token for MCP JWT token
     const tokenResponse = await fetch(mcpOauthUrl, {
       method: "POST",
       headers: {
         "Content-Type": "application/x-www-form-urlencoded",
       },
-      body: formData.toString(),
+      body: formBody,
     });
+
+    // Log removido para produção
 
     if (tokenResponse.ok) {
       const tokenData = await tokenResponse.json();
+      // Log removido para produção
       return tokenData.access_token;
     } else {
-      console.error("Token exchange failed:", await tokenResponse.text());
+      const errorText = await tokenResponse.text();
+      console.error(
+        `Token exchange failed (${tokenResponse.status}):`,
+        errorText,
+      );
+      return null;
     }
   } catch (e) {
     console.error("Error during token exchange:", e);
@@ -116,7 +138,12 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
     const lowerKey = key.toLowerCase();
 
     // avoid banned headers that cause errors in Undici (Node.js fetch)
-    const bannedHeaders = ["connection", "content-length", "transfer-encoding", "expect"];
+    const bannedHeaders = [
+      "connection",
+      "content-length",
+      "transfer-encoding",
+      "expect",
+    ];
 
     if (!bannedHeaders.includes(lowerKey) && lowerKey !== "host") {
       headers.append(key, value);
@@ -147,6 +174,8 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
         console.error("Failed to parse MCP_TOKENS env variable", e);
       }
     }
+
+    // Logs de debug removidos para produção
 
     // If no token yet, try Supabase-JWT token exchange
     if (!accessToken && supabaseToken && MCP_SERVER_URL) {
@@ -191,9 +220,8 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
   }
 
   try {
-    console.log('Target URL:', targetUrl);
-    console.log('Headers:', headers);
-    console.log('Body:', body);
+    // Logs de debug removidos para produção
+    console.log("targetUrl", targetUrl);
 
     // Make the proxied request
     const response = await fetch(targetUrl, {
@@ -201,6 +229,9 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
       headers,
       body,
     });
+
+    console.log("response", response);
+
     // Clone the response to create a new one we can modify
     const responseClone = response.clone();
 
@@ -266,7 +297,7 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
       {
         status: 502,
         headers: { "Content-Type": "application/json" },
-      }
+      },
     );
   }
 }
