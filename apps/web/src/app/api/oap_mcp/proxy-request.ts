@@ -221,7 +221,7 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
 
   try {
     // Logs de debug removidos para produção
-    console.log("targetUrl", targetUrl);
+    // console.log("targetUrl", targetUrl);
 
     // Make the proxied request
     const response = await fetch(targetUrl, {
@@ -230,7 +230,7 @@ export async function proxyRequest(req: NextRequest): Promise<Response> {
       body,
     });
 
-    console.log("response", response);
+    // console.log("response", response);
 
     // Clone the response to create a new one we can modify
     const responseClone = response.clone();
