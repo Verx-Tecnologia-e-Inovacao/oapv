@@ -47,7 +47,8 @@
     "colecao",
     "padrao",
     "metadatas",
-    "esnext"
+    "esnext",
+    "verx"
   ],
   "enableFiletypes": [
     "javascript",
