@@ -26,7 +26,14 @@ const signupSchema = z
     firstName: z.string().min(1, "Nome é obrigatório"),
     lastName: z.string().min(1, "Sobrenome é obrigatório"),
     companyName: z.string().optional(),
-    email: z.string().email("Por favor, insira um email válido"),
+    email: z
+      .string()
+      .min(1, "E-mail é obrigatório")
+      .email("Por favor, insira um email válido")
+      .refine(
+        (email) => !email || email.endsWith("@verx.com.br"),
+        "Apenas e-mails do domínio @verx.com.br são permitidos",
+      ),
     password: z
       .string()
       .min(8, "Senha deve ter pelo menos 8 caracteres")
@@ -91,6 +98,12 @@ export default function SignupInterface() {
   const handleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
     setAuthError(null);
+
+    // Validação adicional de domínio
+    if (formValues.email && !formValues.email.endsWith("@verx.com.br")) {
+      setAuthError("Apenas e-mails do domínio @verx.com.br são permitidos");
+      return;
+    }
 
     if (!validateForm()) return;
 
@@ -221,13 +234,17 @@ export default function SignupInterface() {
                 id="email"
                 name="email"
                 type="email"
-                placeholder="nome@exemplo.com"
+                placeholder="nome@verx.com.br"
                 value={formValues.email || ""}
                 onChange={handleInputChange}
                 aria-invalid={!!errors.email}
               />
-              {errors.email && (
+              {errors.email ? (
                 <p className="text-destructive text-sm">{errors.email}</p>
+              ) : (
+                <p className="text-muted-foreground text-xs">
+                  Apenas e-mails do domínio @verx.com.br são aceitos
+                </p>
               )}
             </div>
 
