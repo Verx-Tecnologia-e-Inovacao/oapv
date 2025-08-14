@@ -87,11 +87,11 @@ export class SupabaseAuthProvider implements AuthProvider {
   async signUp(credentials: AuthCredentials) {
     try {
       // Validação do domínio do e-mail
-      if (!credentials.email.endsWith('@verx.com.br')) {
+      if (!credentials.email.endsWith("@verx.com.br")) {
         throw {
-          message: 'Apenas e-mails do domínio @verx.com.br são permitidos',
+          message: "Apenas e-mails do domínio @verx.com.br são permitidos",
           status: 400,
-          code: 'invalid_email_domain'
+          code: "invalid_email_domain",
         };
       }
 

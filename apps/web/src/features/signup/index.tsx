@@ -32,7 +32,7 @@ const signupSchema = z
       .email("Por favor, insira um email válido")
       .refine(
         (email) => !email || email.endsWith("@verx.com.br"),
-        "Apenas e-mails do domínio @verx.com.br são permitidos"
+        "Apenas e-mails do domínio @verx.com.br são permitidos",
       ),
     password: z
       .string()
@@ -100,8 +100,8 @@ export default function SignupInterface() {
     setAuthError(null);
 
     // Validação adicional de domínio
-    if (formValues.email && !formValues.email.endsWith('@verx.com.br')) {
-      setAuthError('Apenas e-mails do domínio @verx.com.br são permitidos');
+    if (formValues.email && !formValues.email.endsWith("@verx.com.br")) {
+      setAuthError("Apenas e-mails do domínio @verx.com.br são permitidos");
       return;
     }
 
