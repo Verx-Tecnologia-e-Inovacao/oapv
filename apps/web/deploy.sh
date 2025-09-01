@@ -2,7 +2,7 @@
 
 set -e  # Para interromper em caso de erro
 APP_NAME="via-open-agent-platform"
-APP_DIR="/home/ubuntu/app/apps/web"
+APP_DIR="/home/ubuntu/oapv/apps/web"
 
 echo "🚀 Iniciando deploy para $APP_NAME..."
 
